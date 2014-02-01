@@ -49,26 +49,25 @@ group :development do
 end
 
 group :test, :development do
-  gem 'spork-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'rack-mini-profiler'
   gem 'rspec-rails', '~> 3.0.0.beta'
-  # gem 'capybara'
-  # gem 'database_cleaner'
-  gem 'fuubar'
-  # gem 'launchy'
-  # gem 'rack-mini-profiler'
-  # gem 'rb-fsevent'
+  gem 'spork-rails'
 end
 
 group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'fuubar', git: 'git@github.com:jrmyward/fuubar.git', branch: 'develop'
   gem 'guard-spork'
-  # gem 'shoulda-matchers'
-  # gem 'selenium-webdriver'
-  # gem 'factory_girl_rails'
-  # gem 'faker'
-  # gem 'webmock'
-  # gem 'timecop'
+  gem 'poltergeist'
+  gem 'shoulda-matchers'
   gem 'simplecov', '>=0.4.2', :require => false
-  # gem 'stripe-ruby-mock', '>= 1.8.7.4'
-  # gem 'turn', :require => false
-  # gem 'vcr'
+  gem 'stripe-ruby-mock', '>= 1.8.7.4'
+  gem 'timecop'
+  gem 'turn', :require => false
+  gem 'vcr'
+  gem 'webmock'
 end

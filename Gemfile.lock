@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:jrmyward/fuubar.git
+  revision: 7ed2a5fbed0c10e5809ec80ebfd23b790a603139
+  branch: develop
+  specs:
+    fuubar (1.3.2)
+      rspec (>= 2.14.0, <= 3.1.0)
+      ruby-progressbar (~> 1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,16 +36,26 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.5)
+    ansi (1.4.3)
     arel (5.0.0)
     atomic (1.1.14)
+    blankslate (3.1.2)
     builder (3.2.2)
     bullet (4.7.1)
       activesupport
       uniform_notifier (>= 1.4.0)
+    capybara (2.2.1)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     childprocess (0.4.0)
       ffi (~> 1.0, >= 1.0.11)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -46,6 +65,10 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.3.6)
+    crack (0.4.1)
+      safe_yaml (~> 0.9.0)
+    dante (0.2.0)
+    database_cleaner (1.2.0)
     debugger (1.6.5)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -56,11 +79,15 @@ GEM
     docile (1.1.2)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.3.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
+      railties (>= 3.0.0)
+    faker (1.2.0)
+      i18n (~> 0.5)
     ffi (1.9.3)
     formatador (0.2.4)
-    fuubar (1.3.2)
-      rspec (>= 2.14.0, < 3.1.0)
-      ruby-progressbar (~> 1.3)
     guard (2.3.0)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -79,10 +106,17 @@ GEM
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
+    jimson-temp (0.9.5)
+      blankslate (>= 3.1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.4)
+      rest-client (~> 1.0)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -93,9 +127,17 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.5.2)
     minitest (5.2.2)
     multi_json (1.8.4)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     pg (0.17.1)
+    poltergeist (1.5.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -105,6 +147,8 @@ GEM
       debugger (~> 1.3)
       pry (~> 0.9.10)
     rack (1.5.2)
+    rack-mini-profiler (0.9.0)
+      rack (>= 1.1.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.0.beta1)
@@ -126,6 +170,8 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (3.0.0.beta1)
       rspec-core (= 3.0.0.beta1)
       rspec-expectations (= 3.0.0.beta1)
@@ -133,10 +179,12 @@ GEM
     rspec-collection_matchers (0.0.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.0.beta1)
+      rspec-support (= 3.0.0.beta1)
     rspec-expectations (3.0.0.beta1)
       diff-lcs (>= 1.1.3, < 2.0)
       rspec-support (= 3.0.0.beta1)
     rspec-mocks (3.0.0.beta1)
+      rspec-support (= 3.0.0.beta1)
     rspec-rails (3.0.0.beta1)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -148,11 +196,14 @@ GEM
       rspec-mocks (= 3.0.0.beta1)
     rspec-support (3.0.0.beta1)
     ruby-progressbar (1.4.1)
+    safe_yaml (0.9.7)
     sass (3.2.14)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    shoulda-matchers (2.5.0)
+      activesupport (>= 3.0.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -173,22 +224,40 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    stripe (1.10.0)
+      mime-types (~> 1.25)
+      multi_json (>= 1.0.4, < 2)
+      rest-client (~> 1.4)
+    stripe-ruby-mock (1.8.7.4)
+      dante (>= 0.2.0)
+      jimson-temp
+      stripe (>= 1.8.4)
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
+    turn (0.9.6)
+      ansi
     tzinfo (1.1.0)
       thread_safe (~> 0.1)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uniform_notifier (1.4.0)
+    vcr (2.8.0)
+    webmock (1.17.1)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
+    websocket-driver (0.3.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     yard (0.8.7.3)
 
 PLATFORMS
@@ -196,21 +265,34 @@ PLATFORMS
 
 DEPENDENCIES
   bullet
+  capybara
   coffee-rails (~> 4.0.0)
-  fuubar
+  database_cleaner
+  factory_girl_rails
+  faker
+  fuubar!
   guard-rspec
   guard-spork
   jbuilder (~> 1.2)
   jquery-rails
+  launchy
   pg
+  poltergeist
   pry
   pry-debugger
+  rack-mini-profiler
   rails (= 4.1.0.beta1)
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0.rc1)
+  shoulda-matchers
   simplecov (>= 0.4.2)
   spork-rails
   spring
+  stripe-ruby-mock (>= 1.8.7.4)
+  timecop
   turbolinks
+  turn
   uglifier (>= 1.3.0)
+  vcr
+  webmock
   yard
