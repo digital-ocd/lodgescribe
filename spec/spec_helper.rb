@@ -5,6 +5,20 @@ Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
+  unless ENV['DRB']
+    require 'simplecov'
+    SimpleCov.start 'rails' do
+      add_group 'Controllers', 'app/controllers'
+      add_group 'Models', 'app/models'
+      add_group 'Helpers', 'app/helpers'
+      add_group 'Libraries', 'lib'
+      # add_group "Long files" do |src_file|
+      #   src_file.lines.count > 100
+      # end
+      add_group 'Services', 'app/services'
+      add_group 'Uploads', 'app/uploaders'
+    end
+  end
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
@@ -63,5 +77,18 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
+  if ENV['DRB']
+    require 'simplecov'
+    SimpleCov.start 'rails' do
+      add_group 'Controllers', 'app/controllers'
+      add_group 'Models', 'app/models'
+      add_group 'Helpers', 'app/helpers'
+      add_group 'Libraries', 'lib'
+      add_group "Long files" do |src_file|
+        src_file.lines.count > 100
+      end
+      add_group 'Services', 'app/services'
+      add_group 'Uploads', 'app/uploaders'
+    end
+  end
 end

@@ -67,7 +67,7 @@ group :test do
   # gem 'faker'
   # gem 'webmock'
   # gem 'timecop'
-  # gem 'simplecov', '>=0.4.2', :require => false
+  gem 'simplecov', '>=0.4.2', :require => false
   # gem 'stripe-ruby-mock', '>= 1.8.7.4'
   # gem 'turn', :require => false
   # gem 'vcr'
