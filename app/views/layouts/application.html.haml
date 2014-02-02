@@ -10,3 +10,17 @@
   %body
     = render "shared/google_tag_manager"
     = render "shared/header"
+
+    .main
+      =  yield(:content_top) if content_for?(:content_top)
+      - if flash.count > 0
+        %section.wrapper-sm
+          .container
+            .row.flash-notifications
+              - flash.each do |name, msg|
+                %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}"}
+                  %button.close{"data-dismiss" => "alert", :href => "#"} &times;
+                  =msg
+      = yield
+
+    = render "shared/footer"
