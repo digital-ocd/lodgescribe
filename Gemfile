@@ -1,43 +1,70 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0.beta1'
 
-# Use postgresql as the database for Active Record
-gem 'pg'
-
+# assets
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer',  platforms: :ruby
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+# authentication
+# gem 'devise'
 
+# cron
+# gem 'whenever'
+
+# database
+gem 'pg'
+
+# deployment
+gem 'unicorn'
+
+# image manipulation
+# gem 'rmagick'
+# gem 'carrierwave'
+
+# javascript
 gem 'jquery-rails'
 gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# mailchimp
+# gem 'gibbon'
+
+# payment
+# gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+# gem 'stripe_event'
+
+# querying
+# gem "squeel"
+
+# queque
+# gem 'sidekiq'
+
+# sitemap
+# gem 'sitemap_generator'
+
+# views
+gem 'browser', :git => 'git://github.com/fnando/browser'
+# gem "font-awesome-rails"
+gem 'haml'
+gem 'haml-rails'
+# gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 
 group :doc do
   # gem 'sdoc', require: false
   gem 'yard'
 end
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/jonleighton/spring
-gem 'spring',        group: :development
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 # Tools
 gem 'pry'
 gem 'pry-debugger'
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/jonleighton/spring
+gem 'spring',        group: :development
 
 group :development do
   gem 'bullet'
