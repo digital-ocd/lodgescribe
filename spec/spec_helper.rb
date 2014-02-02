@@ -24,7 +24,13 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
+  require 'capybara/rspec'
+  require 'capybara/rails'
+  require 'capybara/poltergeist'
+  require 'database_cleaner'
+  require 'shoulda-matchers'
+
+  Capybara.javascript_driver = :poltergeist
 
   # Requires supporting ruby files with custom matchers and macros, etc, in
   # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -48,13 +54,32 @@ Spork.prefork do
     # config.mock_with :flexmock
     # config.mock_with :rr
 
+    # Include / Extend
+    # config.include Devise::TestHelpers, :type => :controller
+    # config.extend ControllerMacros, :type => :controller
+    config.include FactoryGirl::Syntax::Methods
+    # config.include MailerMacros
+
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     config.use_transactional_fixtures = false
 
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation, {
+        :except => %w[]
+      }
+      Timecop.return
+    end
 
+    config.before(:each) do
+      DatabaseCleaner.start
+      # reset_email
+    end
 
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
 
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
@@ -68,7 +93,6 @@ Spork.prefork do
     config.order = "random"
 
     # Focus on individual tests
-    config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
   end
