@@ -12,6 +12,15 @@ gem 'coffee-rails', '~> 4.0.0'
 # authentication
 # gem 'devise'
 
+# blog
+# gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
+# gem 'ancestry'
+# gem 'friendly_id', git: 'https://github.com/FriendlyId/friendly_id'
+# gem 'rakismet'
+gem 'redcarpet'
+# gem 'will_paginate'
+# gem 'will_paginate-bootstrap'
+
 # cron
 # gem 'whenever'
 
@@ -89,6 +98,7 @@ group :test do
   gem 'faker'
   gem 'fuubar', git: 'git@github.com:jrmyward/fuubar.git', branch: 'develop'
   gem 'guard-spork'
+  gem 'minitest'
   gem 'poltergeist'
   gem 'shoulda-matchers'
   gem 'simplecov', '>=0.4.2', :require => false
