@@ -1,0 +1,28 @@
+%meta{:charset => "utf-8"}/
+= csrf_meta_tags
+%title= content_for?(:title) ? "#{yield(:title)} | LodgeScribe" : "LodgeScribe | Lodge Member Management"
+%meta{:content => content_for?(:meta_author) ? "#{yield(:meta_author)}" : "LodgeScribe", :name => "author"}/
+%meta{:content => content_for?(:description) ? "#{yield(:description)}" : "LodgeScribe makes member management for Masonic Lodges easy. FREE 30-day Trial! Learn more today..", :name => "description"}/
+
+%meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}/
+/ end: Mobile Specific
+/ start: Facebook Open Graph
+%meta{:content => content_for?(:title) ? "#{yield(:title)} | LodgeScribe" : "LodgeScribe | Bussiness Review Tracker", :property => "og:title"}/
+%meta{:content => content_for?(:description) ? "#{yield(:description)}" : "LodgeScribe makes member management for Masonic Lodges easy. FREE 30-day Trial! Learn more today.", :property => "og:description"}/
+%meta{:content => content_for?(:og_type) ? "#{yield(:og_type)}" : "", :property => "og:type"}/
+%meta{:content => "LodgeScribe", :property => "og:site_name"}/
+%meta{:content => content_for?(:og_url) ? "#{yield(:og_url)}" : "http://LodgeScribe.com", :property => "og:url"}/
+%meta{:content => content_for?(:og_image) ? "#{yield(:og_image)}" : "#{image_url 'logo_300.png'}", :property => "og:image"}/
+/ end: Facebook Open Graph
+/ start: Twitter Card
+%meta{:content => "summary", :name => "twitter:card"}/
+%meta{:content => "@LodgeScribe", :name => "twitter:site"}/
+%meta{:content => content_for?(:title) ? "#{yield(:title)} | LodgeScribe" : "LodgeScribe | Bussiness Review Tracker", :name => "twitter:title"}/
+%meta{:content => content_for?(:description) ? "#{yield(:description)}" : "LodgeScribe makes member management for Masonic Lodges easy. FREE 30-day Trial! Learn more today.", :name => "twitter:description"}/
+%meta{:content => content_for?(:og_image) ? "#{yield(:og_image)}" : "#{image_url 'logo_300.png'}", :name => "twitter:image:src"}/
+%meta{:content => content_for?(:meta_twitter_creator) ? "#{yield(:meta_twitter_creator)}" : "@LodgeScribe", :name => "twitter:creator"}/
+/ end: Twitter Card
+
+= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon', :type => 'image/x-icon'
+
+%link{:href => content_for?(:canonical) ? "#{yield(:canonical)}" : "#{request.original_url}", :rel => "canonical"}/

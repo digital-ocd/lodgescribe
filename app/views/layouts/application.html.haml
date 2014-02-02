@@ -1,0 +1,7 @@
+!!!
+%html{lang: "en", xmlns: "http://www.w3.org/1999/xhtml", "xmlns:fb" => "https://www.facebook.com/2008/fbml", "xmlns:og" => "http://ogp.me/ns#"}
+  %head
+    = render "shared/layout_meta"
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true, type: "text/javascript"
+    = yield(:head)
