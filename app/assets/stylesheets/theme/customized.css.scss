@@ -1,0 +1,41 @@
+/*
+ *  Template Name : LodgeScribe
+ *  Author : Jeremy S. Ward
+ *  Author URI : http://jrmyward.com
+ *  -----------------------------------------------------------
+ *
+ */
+
+.navbar-default {
+  background-color: #1D2F41;
+  .navbar-brand {
+    color: #ccc;
+    display: inline-block;
+    height: 70px;
+    padding: 10px 10px;
+    img {
+      margin-right: 5px;
+      max-height:100%;
+      height:auto;
+    }
+  }
+  .navbar-brand:hover {
+    color: #777;
+  }
+
+}
+
+.navbar-nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #ccc;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #777;
+  background-color: transparent;
+}
