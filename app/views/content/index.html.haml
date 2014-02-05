@@ -1,2 +1,28 @@
-%h1 Content#index
-%p Find me in app/views/content/index.html.haml
+-content_for :content_top do
+  #headerwrap
+    .container
+      .col-lg-7
+        %h1
+          Welcome to
+          = succeed "," do
+            %b Smart
+          %br/
+          a Beautiful & Multipurpose Bootstrap Theme.
+
+#y
+  .container
+    .row.centered
+      .col-lg-4
+        %span.glyphicon.glyphicon-cloud
+        %h3 Bootstrap 3
+        %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.
+      / /col-lg-4
+      .col-lg-4
+        %span.glyphicon.glyphicon-fire
+        %h3 Beautiful Design
+        %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.
+      / /col-lg-4
+      .col-lg-4
+        %span.glyphicon.glyphicon-flash
+        %h3 Cool Features
+        %p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1500s.
