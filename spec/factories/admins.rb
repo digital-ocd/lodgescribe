@@ -2,5 +2,10 @@
 
 FactoryGirl.define do
   factory :admin do
+    first_name 'Peter'
+    last_name 'Parker'
+    email Faker::Internet.email
+    password 'foobar'
+    password_confirmation 'foobar'
   end
 end

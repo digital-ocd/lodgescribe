@@ -30,6 +30,14 @@ describe ApplicationHelper do
     end
   end
 
+  describe "gravatar_url" do
+    it "returns a gravatar image" do
+      user = build_stubbed(:admin)
+      gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+      expect( helper.gravatar_url(user) ).to eq("https://gravatar.com/avatar/#{gravatar_id}.png?s=26&d=mm")
+    end
+  end
+
   describe "is_active_link?" do
     it "matches the current link" do
       link_path = "/somepage"
