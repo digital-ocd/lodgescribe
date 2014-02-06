@@ -21,6 +21,9 @@ gem 'redcarpet'
 # gem 'will_paginate'
 # gem 'will_paginate-bootstrap'
 
+# charts
+gem 'rickshaw-rails', git: 'https://github.com/jrmyward/rickshaw-rails.git', branch: 'master'
+
 # cron
 # gem 'whenever'
 
