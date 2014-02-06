@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-
+  devise_for :admins, :skip => [:registrations, :sessions]
+  as :admin do
+    get 'admins/signin' => 'devise/sessions#new', as: :new_admin_session
+    post 'admins/signin' => 'devise/sessions#create', as: :admin_session
+    delete 'admins/signout' => 'devise/sessions#destroy', as: :destroy_admin_session
+  end
 
   root to: "content#index"
   # The priority is based upon order of creation: first created -> highest priority.
