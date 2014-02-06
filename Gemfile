@@ -4,7 +4,8 @@ gem 'rails', '4.1.0.beta1'
 
 # assets
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
+gem 'less-rails'
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -62,7 +63,7 @@ gem 'jbuilder', '~> 1.2'
 
 # views
 gem 'browser', :git => 'git://github.com/fnando/browser'
-gem "font-awesome-rails"
+gem "font-awesome-rails", '~> 3.2.1.3'
 gem 'haml'
 gem 'haml-rails'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'

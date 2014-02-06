@@ -2,25 +2,32 @@
 %html{lang: "en", xmlns: "http://www.w3.org/1999/xhtml", "xmlns:fb" => "https://www.facebook.com/2008/fbml", "xmlns:og" => "http://ogp.me/ns#"}
   %head
     = render "shared/layout_meta"
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true, type: "text/javascript"
+    / start: CSS
+    = stylesheet_link_tag "admin_application", media: "all", "data-turbolinks-track" => true
+    / end: CSS
+    / start: Java Script
+    = javascript_include_tag "admin_application", "data-turbolinks-track" => true, type: "text/javascript"
+    / end: Java Script
     = yield(:head)
-    %link{href: "http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic", rel: "stylesheet", type: "text/css"}/
-    %link{href: "http://fonts.googleapis.com/css?family=Raleway:400,300,700", rel: "stylesheet", type: "text/css"}/
   %body
     = render "shared/google_tag_manager"
-    = render "shared/header"
+    = render "shared/header_admin"
 
-    .main
-      =  yield(:content_top) if content_for?(:content_top)
-      - if flash.count > 0
-        %section.wrapper-sm
-          .container
-            .row.flash-notifications
-              - flash.each do |name, msg|
-                %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}"}
-                  %button.close{"data-dismiss" => "alert", :href => "#"} &times;
-                  =msg
-      = yield
+    .container
+      .row
+        = render "shared/nav_left"
+        #content.col-lg-10.col-sm-11
+          = yield(:breadcrumb) if content_for?(:breadcrumb)
+          - if flash.count > 0
+            - flash.each do |name, msg|
+              %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}"}
+                %button.close{"data-dismiss" => "alert", :href => "#"} &times;
+                =msg
+          = yield
+    = yield(:modals) if content_for?(:modals)
+    .clearfix
+    %footer
+      %p
+        %small{style: "text-align:left;float:left"}
+          &copy; 2013 OC Digital, LLC. All Rights Reserved.
 
-    = render "shared/footer"

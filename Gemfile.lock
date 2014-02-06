@@ -87,6 +87,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.3.6)
+    commonjs (0.2.7)
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     dante (0.2.0)
@@ -115,7 +116,7 @@ GEM
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.3)
-    font-awesome-rails (4.0.3.1)
+    font-awesome-rails (3.2.1.3)
       railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     guard (2.3.0)
@@ -158,6 +159,12 @@ GEM
     kgio (2.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
+    less (2.4.0)
+      commonjs (~> 0.2.7)
+    less-rails (2.4.2)
+      actionpack (>= 3.1)
+      less (~> 2.4.0)
+    libv8 (3.16.14.3)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -214,6 +221,7 @@ GEM
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
     redcarpet (3.0.0)
+    ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (3.0.0.beta1)
@@ -276,6 +284,9 @@ GEM
       dante (>= 0.2.0)
       jimson-temp
       stripe (>= 1.8.4)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -322,7 +333,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
-  font-awesome-rails
+  font-awesome-rails (~> 3.2.1.3)
   fuubar!
   guard-rspec
   guard-spork
@@ -332,6 +343,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   launchy
+  less-rails
   minitest
   pg
   poltergeist
@@ -349,6 +361,7 @@ DEPENDENCIES
   spork-rails
   spring
   stripe-ruby-mock (>= 1.8.7.4)
+  therubyracer
   timecop
   turbolinks
   turn
