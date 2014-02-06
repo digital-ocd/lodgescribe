@@ -5,6 +5,14 @@ GIT
     browser (0.3.2)
 
 GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: 32019827798eddbecc19676d69eb406a4f3902cc
+  specs:
+    simple_form (3.0.1)
+      actionpack (>= 4.0.0, < 4.1)
+      activemodel (>= 4.0.0, < 4.1)
+
+GIT
   remote: git@github.com:jrmyward/fuubar.git
   revision: 7ed2a5fbed0c10e5809ec80ebfd23b790a603139
   branch: develop
@@ -324,6 +332,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0.rc1)
   shoulda-matchers
+  simple_form!
   simplecov (>= 0.4.2)
   spork-rails
   spring

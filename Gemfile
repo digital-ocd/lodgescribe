@@ -61,7 +61,7 @@ gem 'browser', :git => 'git://github.com/fnando/browser'
 gem "font-awesome-rails"
 gem 'haml'
 gem 'haml-rails'
-# gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 
 group :doc do
   # gem 'sdoc', require: false
