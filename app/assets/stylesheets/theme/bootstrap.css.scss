@@ -2389,12 +2389,6 @@ input[type="button"].btn-block {
   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
-/*@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: asset-url("glyphicons-halflings-regular.eot");
-  src: asset-url("glyphicons-halflings-regular.eot?#iefix") format('embedded-opentype'), asset-url("glyphicons-halflings-regular.woff") format('woff'), asset-url("glyphicons-halflings-regular.ttf") format('truetype'), asset-url("glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format('svg');
-}*/
-
 .glyphicon {
   position: relative;
   top: 1px;
@@ -4187,18 +4181,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-brand {
-  display: inline-block;
-  height: 70px;
   float: left;
-  padding: 10px 10px;
+  padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
-}
-
-.navbar-brand img {
-  margin-right: 5px;
-  max-height:100%;
-  height:auto;
 }
 
 .navbar-brand:hover,
@@ -4283,8 +4269,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
 
@@ -4387,8 +4373,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-  /*background-color: #f8f8f8;*/
-  background-color: #1D2F41;
+  background-color: #f8f8f8;
   border-color: #e7e7e7;
 }
 
