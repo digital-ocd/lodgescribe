@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-  protect_from_forgery
-
+  prepend_before_action :authenticate_admin!
   layout "admin"
 end

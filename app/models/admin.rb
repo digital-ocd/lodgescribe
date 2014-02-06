@@ -10,4 +10,8 @@ class Admin < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def saas_admin?
+    true
+  end
+
 end

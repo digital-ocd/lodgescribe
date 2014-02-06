@@ -6,11 +6,19 @@ describe Admin do
   it { should respond_to(:first_name) }
   it { should respond_to(:full_name) }
   it { should respond_to(:last_name) }
+  it { should respond_to(:saas_admin?) }
 
   describe "full_name" do
     it "return a concatinated first and last name" do
       admin = build_stubbed(:admin)
-      admin.full_name.should == "#{admin.first_name} #{admin.last_name}"
+      expect(admin.full_name).to eq("#{admin.first_name} #{admin.last_name}")
+    end
+  end
+
+  describe "saas_admin?" do
+    it "returns true" do
+      admin = build_stubbed(:admin)
+      expect(admin.saas_admin?).to be true
     end
   end
 
