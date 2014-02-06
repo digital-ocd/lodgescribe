@@ -1,13 +1,22 @@
-= form_for @admins_user do |f|
-  - if @admins_user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@admins_user.errors.count, "error")} prohibited this admins_user from being saved:"
-      %ul
-        - @admins_user.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :dashboard
-    = f.text_field :dashboard
-  .actions
-    = f.submit 'Save'
+- if @saas_admin.errors.any?
+  .alert.alert-block.alert-danger
+    %a.close{"data-dismiss" => "alert"} ×
+    %h4.alert-heading Oh Snap!
+    We found #{pluralize(@saas_admin.errors.count, "problem")} with the form:
+    %ul
+      - @saas_admin.errors.full_messages.each do |msg|
+        %li= msg
+= f.input :first_name
+= f.input :last_name
+= f.input :email
+- if @saas_admin.encrypted_password?
+  .legend-cont
+    %legend
+      Change Password
+      %small Leave blank to keep your current password
+= f.input :password, input_html: { autocomplete: 'off' }
+= f.input :password_confirmation, :label =>"Confirm Password"
+- if @saas_admin.encrypted_password?
+  .alert.alert-warning
+    Enter your current password to confirm changes
+  = f.input :current_password, :hint => "We need your current password to confirm your changes", input_html: { autocomplete: 'off' }

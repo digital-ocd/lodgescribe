@@ -1,79 +1,72 @@
 class Admins::UsersController < AdminsController
-
+  before_action :set_saas_admin, only: [:show, :edit, :update, :destroy]
   def dashboard
 
   end
 
-  # before_action :set_admins_user, only: [:show, :edit, :update, :destroy]
+  # GET /a/users
+  # GET /a/users.json
+  def index
+    @saas_admins = Admin.all
+  end
 
-  # # GET /admins/users
-  # # GET /admins/users.json
-  # def index
-  #   @admins_users = Admins::User.all
-  # end
+  # GET /a/users/1
+  # GET /a/users/1.json
+  def show
+  end
 
-  # # GET /admins/users/1
-  # # GET /admins/users/1.json
-  # def show
-  # end
+  # GET /a/users/new
+  def new
+    @saas_admin = Admin.new
+  end
 
-  # # GET /admins/users/new
-  # def new
-  #   @admins_user = Admins::User.new
-  # end
+  # GET /a/users/1/edit
+  def edit
+  end
 
-  # # GET /admins/users/1/edit
-  # def edit
-  # end
+  # POST /a/users
+  # POST /a/users.json
+  def create
+    @saas_admin = Admin.new(params[:admin])
+    respond_to do |format|
+      if @saas_admin.save
+        format.html { redirect_to admin_users_path, notice: 'SaaS Admin was successfully created.' }
+        format.json { render action: 'show', status: :created, admin: @saas_admin }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @saas_admin.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-  # # POST /admins/users
-  # # POST /admins/users.json
-  # def create
-  #   @admins_user = Admins::User.new(admins_user_params)
+  # PATCH/PUT /a/users/1
+  # PATCH/PUT /a/users/1.json
+  def update
+    respond_to do |format|
+      if @saas_admin.update(params[:admin])
+        format.html { redirect_to admin_users_path, notice: 'SaaS Admin was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @saas_admin.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-  #   respond_to do |format|
-  #     if @admins_user.save
-  #       format.html { redirect_to @admins_user, notice: 'User was successfully created.' }
-  #       format.json { render action: 'show', status: :created, location: @admins_user }
-  #     else
-  #       format.html { render action: 'new' }
-  #       format.json { render json: @admins_user.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  # DELETE /a/users/1
+  # DELETE /a/users/1.json
+  def destroy
+    @saas_admin.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_users_path }
+      format.json { head :no_content }
+    end
+  end
 
-  # # PATCH/PUT /admins/users/1
-  # # PATCH/PUT /admins/users/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @admins_user.update(admins_user_params)
-  #       format.html { redirect_to @admins_user, notice: 'User was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: 'edit' }
-  #       format.json { render json: @admins_user.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_saas_admin
+      @saas_admin = Admin.find(params[:id])
+    end
 
-  # # DELETE /admins/users/1
-  # # DELETE /admins/users/1.json
-  # def destroy
-  #   @admins_user.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to admins_users_url }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
-  # private
-  #   # Use callbacks to share common setup or constraints between actions.
-  #   def set_admins_user
-  #     @admins_user = Admins::User.find(params[:id])
-  #   end
-
-  #   # Never trust parameters from the scary internet, only allow the white list through.
-  #   def admins_user_params
-  #     params.require(:admins_user).permit(:dashboard)
-  #   end
 end

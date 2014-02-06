@@ -19,142 +19,136 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe Admins::UsersController do
+  let(:valid_attributes) { attributes_for(:admin) }
+  let(:admin) { create(:admin) }
 
-  # # This should return the minimal set of attributes required to create a valid
-  # # Admins::User. As you add validations to Admins::User, be sure to
-  # # adjust the attributes here as well.
-  # let(:valid_attributes) { { "dashboard" => "MyString" } }
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:admin]
+    sign_in admin
+  end
 
-  # # This should return the minimal set of values that should be in the session
-  # # in order to pass any filters (e.g. authentication) defined in
-  # # Admins::UsersController. Be sure to keep this updated too.
-  # let(:valid_session) { {} }
+  describe "GET index" do
+    it "assigns all admins_users as @saas_admins" do
+      get :index, {}
+      expect(assigns(:saas_admins)).to eq([admin])
+    end
+  end
 
-  # describe "GET index" do
-  #   it "assigns all admins_users as @admins_users" do
-  #     user = Admins::User.create! valid_attributes
-  #     get :index, {}, valid_session
-  #     expect(assigns(:admins_users)).to eq([user])
-  #   end
-  # end
+  describe "GET show" do
+    it "assigns the requested admins_user as @saas_admin" do
+      get :show, {id: admin.id}
+      expect(assigns(:saas_admin)).to eq(admin)
+    end
+  end
 
-  # describe "GET show" do
-  #   it "assigns the requested admins_user as @admins_user" do
-  #     user = Admins::User.create! valid_attributes
-  #     get :show, {:id => user.to_param}, valid_session
-  #     expect(assigns(:admins_user)).to eq(user)
-  #   end
-  # end
+  describe "GET new" do
+    it "assigns a new admins_user as @saas_admin" do
+      get :new, {}
+      expect(assigns(:saas_admin)).to be_a_new(Admin)
+    end
+  end
 
-  # describe "GET new" do
-  #   it "assigns a new admins_user as @admins_user" do
-  #     get :new, {}, valid_session
-  #     expect(assigns(:admins_user)).to be_a_new(Admins::User)
-  #   end
-  # end
+  describe "GET edit" do
+    it "assigns the requested admins_user as @saas_admin" do
+      get :edit, {id: admin.to_param}
+      expect(assigns(:saas_admin)).to eq(admin)
+    end
+  end
 
-  # describe "GET edit" do
-  #   it "assigns the requested admins_user as @admins_user" do
-  #     user = Admins::User.create! valid_attributes
-  #     get :edit, {:id => user.to_param}, valid_session
-  #     expect(assigns(:admins_user)).to eq(user)
-  #   end
-  # end
+  describe "POST create" do
+    describe "with valid params" do
+      it "creates a new Admin" do
+        expect {
+          post :create, {admin: valid_attributes}
+        }.to change(Admin, :count).by(1)
+      end
 
-  # describe "POST create" do
-  #   describe "with valid params" do
-  #     it "creates a new Admins::User" do
-  #       expect {
-  #         post :create, {:admins_user => valid_attributes}, valid_session
-  #       }.to change(Admins::User, :count).by(1)
-  #     end
+      it "assigns a newly created admins_user as @saas_admin" do
+        post :create, {admin: valid_attributes}
+        expect(assigns(:saas_admin)).to be_a(Admin)
+        expect(assigns(:saas_admin)).to be_persisted
+      end
 
-  #     it "assigns a newly created admins_user as @admins_user" do
-  #       post :create, {:admins_user => valid_attributes}, valid_session
-  #       expect(assigns(:admins_user)).to be_a(Admins::User)
-  #       expect(assigns(:admins_user)).to be_persisted
-  #     end
+      it "redirects to the created admins_user" do
+        post :create, {admin: valid_attributes}
+        expect(response).to redirect_to(admin_users_path)
+      end
+    end
 
-  #     it "redirects to the created admins_user" do
-  #       post :create, {:admins_user => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(Admins::User.last)
-  #     end
-  #   end
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved admins_user as @saas_admin" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(Admin).to receive(:save).and_return(false)
+        post :create, {admin: { "email" => "invalid value" }}
+        expect(assigns(:saas_admin)).to be_a_new(Admin)
+      end
 
-  #   describe "with invalid params" do
-  #     it "assigns a newly created but unsaved admins_user as @admins_user" do
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       Admins::User.any_instance.stub(:save).and_return(false)
-  #       post :create, {:admins_user => { "dashboard" => "invalid value" }}, valid_session
-  #       expect(assigns(:admins_user)).to be_a_new(Admins::User)
-  #     end
+      it "re-renders the 'new' template" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(Admin).to receive(:save).and_return(false)
+        post :create, {admin: { "email" => "invalid value" }}
+        expect(response).to render_template("new")
+      end
+    end
+  end
 
-  #     it "re-renders the 'new' template" do
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       Admins::User.any_instance.stub(:save).and_return(false)
-  #       post :create, {:admins_user => { "dashboard" => "invalid value" }}, valid_session
-  #       expect(response).to render_template("new")
-  #     end
-  #   end
-  # end
+  describe "PUT update" do
+    describe "with valid params" do
+      it "updates the requested admins_user" do
+        user = Admin.create! valid_attributes
+        # Assuming there are no other admins_users in the database, this
+        # specifies that the Admin created on the previous line
+        # receives the :update_attributes message with whatever params are
+        # submitted in the request.
+        expect_any_instance_of(Admin).to receive(:update).with({ "email" => "spider-man@avengers.com" })
+        put :update, {id: user.to_param, admin: { "email" => "spider-man@avengers.com" }}
+      end
 
-  # describe "PUT update" do
-  #   describe "with valid params" do
-  #     it "updates the requested admins_user" do
-  #       user = Admins::User.create! valid_attributes
-  #       # Assuming there are no other admins_users in the database, this
-  #       # specifies that the Admins::User created on the previous line
-  #       # receives the :update_attributes message with whatever params are
-  #       # submitted in the request.
-  #       expect_any_instance_of(Admins::User).to receive(:update).with({ "dashboard" => "MyString" })
-  #       put :update, {:id => user.to_param, :admins_user => { "dashboard" => "MyString" }}, valid_session
-  #     end
+      it "assigns the requested admins_user as @saas_admin" do
+        user = Admin.create! valid_attributes
+        put :update, {id: user.to_param, admin: valid_attributes}
+        expect(assigns(:saas_admin)).to eq(user)
+      end
 
-  #     it "assigns the requested admins_user as @admins_user" do
-  #       user = Admins::User.create! valid_attributes
-  #       put :update, {:id => user.to_param, :admins_user => valid_attributes}, valid_session
-  #       expect(assigns(:admins_user)).to eq(user)
-  #     end
+      it "redirects to the admins_user" do
+        user = Admin.create! valid_attributes
+        put :update, {id: user.to_param, admin: valid_attributes}
+        expect(response).to redirect_to(admin_users_path)
+      end
+    end
 
-  #     it "redirects to the admins_user" do
-  #       user = Admins::User.create! valid_attributes
-  #       put :update, {:id => user.to_param, :admins_user => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(user)
-  #     end
-  #   end
+    describe "with invalid params" do
+      it "assigns the admins_user as @saas_admin" do
+        user = Admin.create! valid_attributes
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(Admin).to receive(:save).and_return(false)
+        put :update, {id: user.to_param, admin: { "email" => "invalid value" }}
+        expect(assigns(:saas_admin)).to eq(user)
+      end
 
-  #   describe "with invalid params" do
-  #     it "assigns the admins_user as @admins_user" do
-  #       user = Admins::User.create! valid_attributes
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       Admins::User.any_instance.stub(:save).and_return(false)
-  #       put :update, {:id => user.to_param, :admins_user => { "dashboard" => "invalid value" }}, valid_session
-  #       expect(assigns(:admins_user)).to eq(user)
-  #     end
+      it "re-renders the 'edit' template" do
+        user = Admin.create! valid_attributes
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(Admin).to receive(:save).and_return(false)
+        put :update, {id: user.to_param, admin: { "email" => "invalid value" }}
+        expect(response).to render_template("edit")
+      end
+    end
+  end
 
-  #     it "re-renders the 'edit' template" do
-  #       user = Admins::User.create! valid_attributes
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       Admins::User.any_instance.stub(:save).and_return(false)
-  #       put :update, {:id => user.to_param, :admins_user => { "dashboard" => "invalid value" }}, valid_session
-  #       expect(response).to render_template("edit")
-  #     end
-  #   end
-  # end
+  describe "DELETE destroy" do
+    it "destroys the requested admins_user" do
+      new_admin = Admin.create! valid_attributes
+      expect {
+        delete :destroy, {id: new_admin.to_param}
+      }.to change(Admin, :count).by(-1)
+    end
 
-  # describe "DELETE destroy" do
-  #   it "destroys the requested admins_user" do
-  #     user = Admins::User.create! valid_attributes
-  #     expect {
-  #       delete :destroy, {:id => user.to_param}, valid_session
-  #     }.to change(Admins::User, :count).by(-1)
-  #   end
-
-  #   it "redirects to the admins_users list" do
-  #     user = Admins::User.create! valid_attributes
-  #     delete :destroy, {:id => user.to_param}, valid_session
-  #     expect(response).to redirect_to(admins_users_url)
-  #   end
-  # end
+    it "redirects to the admins_users list" do
+      new_admin = Admin.create! valid_attributes
+      delete :destroy, {id: new_admin.to_param}
+      expect(response).to redirect_to(admin_users_path)
+    end
+  end
 
 end

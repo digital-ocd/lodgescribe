@@ -11,9 +11,9 @@ Rails.application.routes.draw do
     delete 'admins/signout' => 'devise/sessions#destroy', as: :destroy_admin_session
   end
 
-  scope 'a', module: 'admins' do
-    get 'dashboard' => 'users#dashboard', as: 'admin_root'
-
+  scope 'a', module: 'admins', as: 'admin' do
+    get 'dashboard' => 'users#dashboard', as: 'root'
+    resources :users
   end
 
   root to: "content#index"
