@@ -1,0 +1,7 @@
+#sidebar-left.col-lg-2.col-sm-1
+  .sidebar-nav.nav-collapse.collapse.navbar-collapse
+    %ul.nav.main-menu
+      - if current_admin
+        = render 'shared/nav_left_admins'
+
+  = link_to raw("<i class='icon-double-angle-left'></i>"), "#", id: "main-menu-min", class: "full visible-md visible-lg"

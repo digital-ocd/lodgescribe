@@ -4,13 +4,14 @@ gem 'rails', '4.1.0.beta1'
 
 # assets
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
+gem 'less-rails'
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # authentication
-# gem 'devise'
+gem 'devise'
 
 # blog
 # gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
@@ -20,6 +21,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'redcarpet'
 # gem 'will_paginate'
 # gem 'will_paginate-bootstrap'
+
+# charts
+gem 'rickshaw-rails', git: 'https://github.com/jrmyward/rickshaw-rails.git', branch: 'master'
 
 # cron
 # gem 'whenever'
@@ -36,6 +40,7 @@ gem 'unicorn'
 
 # javascript
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -58,10 +63,10 @@ gem 'jbuilder', '~> 1.2'
 
 # views
 gem 'browser', :git => 'git://github.com/fnando/browser'
-gem "font-awesome-rails"
+gem "font-awesome-rails", '~> 3.2.1.3'
 gem 'haml'
 gem 'haml-rails'
-# gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 
 group :doc do
   # gem 'sdoc', require: false

@@ -1,0 +1,21 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require theme/bootstrap
+ *= require font-awesome
+ *= require admin_theme/import_css/jquery-ui-1.10.3.custom.min
+ *= require_directory ./admin_theme/import_css
+ *= require admin_theme/style
+ *= require admin_theme/morris
+ *= require rickshaw
+ *= require admin_theme/retina.min
+ *= require admin_theme/customized
+ */
