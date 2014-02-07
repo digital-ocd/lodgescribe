@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205232141) do
+ActiveRecord::Schema.define(version: 20140207022540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,5 +35,20 @@ ActiveRecord::Schema.define(version: 20140205232141) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "subscription_plans", force: true do |t|
+    t.string   "name"
+    t.string   "stripe_id"
+    t.decimal  "amount",         precision: 10, scale: 2
+    t.integer  "renewal_period",                          default: 1
+    t.integer  "trial_period",                            default: 30
+    t.text     "description"
+    t.boolean  "is_featured",                             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscription_plans", ["name"], name: "index_subscription_plans_on_name", using: :btree
+  add_index "subscription_plans", ["stripe_id"], name: "index_subscription_plans_on_stripe_id", unique: true, using: :btree
 
 end

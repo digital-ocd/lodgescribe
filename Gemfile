@@ -111,5 +111,5 @@ group :test do
   gem 'timecop'
   gem 'turn', :require => false
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '< 1.16'
 end

@@ -72,6 +72,10 @@ form{
       font-size: 60%;
     }
   }
+  input[type="radio"], input[type="checkbox"] {
+    margin-top: 0px;
+    width: 35px
+  }
 }
 
 .icon-danger {

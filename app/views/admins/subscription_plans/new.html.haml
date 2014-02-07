@@ -1,0 +1,18 @@
+- content_for :title,  "New Subscription Plan"
+
+.row
+  .col-lg-12
+    .box
+      .box-header
+        %h2
+          %i.icon-beaker
+          Create Subscription Plan
+      .box-content
+        = simple_form_for @subscription_plan, url: admin_subscription_plans_path,  html: { role: "form", class: "form-horizontal" } do |f|
+          %fieldset.col-sm-12
+            = render partial: 'form', locals: {f: f, subscription_plan: @subscription_plan}
+            %hr.divider
+            .form-group
+              .col-lg-offset-2.col-lg-10
+                = f.submit "Create Plan", class: "btn btn-primary"
+                = link_to 'Back', admin_subscription_plans_path, class: "btn"
