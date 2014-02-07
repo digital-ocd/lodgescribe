@@ -7,11 +7,6 @@ class Admins::SubscriptionPlansController < AdminsController
     @subscription_plans = SubscriptionPlan.all
   end
 
-  # GET /subscription_plans/1
-  # GET /subscription_plans/1.json
-  def show
-  end
-
   # GET /subscription_plans/new
   def new
     @subscription_plan = SubscriptionPlan.new
@@ -64,7 +59,7 @@ class Admins::SubscriptionPlansController < AdminsController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription_plan
-      @subscription_plan = SubscriptionPlan.find(params[:id])
+      @subscription_plan = SubscriptionPlan.find_by_stripe_id(params[:id])
     end
 
 end

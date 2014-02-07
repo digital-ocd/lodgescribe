@@ -36,14 +36,6 @@ describe Admins::SubscriptionPlansController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested subscription_plan as @subscription_plan" do
-      subscription_plan = SubscriptionPlan.create! valid_attributes
-      get :show, {id: subscription_plan.id}
-      expect(assigns(:subscription_plan)).to eq(subscription_plan)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new subscription_plan as @subscription_plan" do
       get :new, {}
@@ -54,7 +46,7 @@ describe Admins::SubscriptionPlansController do
   describe "GET edit" do
     it "assigns the requested subscription_plan as @subscription_plan" do
       subscription_plan = SubscriptionPlan.create! valid_attributes
-      get :edit, {id: subscription_plan.id}
+      get :edit, {id: subscription_plan.stripe_id}
       expect(assigns(:subscription_plan)).to eq(subscription_plan)
     end
   end
@@ -105,18 +97,18 @@ describe Admins::SubscriptionPlansController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(SubscriptionPlan).to receive(:update).with({ "these" => "params" })
-        put :update, {id: subscription_plan.id, :subscription_plan => { "these" => "params" }}
+        put :update, {id: subscription_plan.stripe_id, :subscription_plan => { "these" => "params" }}
       end
 
       it "assigns the requested subscription_plan as @subscription_plan" do
         subscription_plan = SubscriptionPlan.create! valid_attributes
-        put :update, {id: subscription_plan.id, :subscription_plan => valid_attributes}
+        put :update, {id: subscription_plan.stripe_id, :subscription_plan => valid_attributes}
         expect(assigns(:subscription_plan)).to eq(subscription_plan)
       end
 
       it "redirects to the subscription_plan" do
         subscription_plan = SubscriptionPlan.create! valid_attributes
-        put :update, {id: subscription_plan.id, :subscription_plan => valid_attributes}
+        put :update, {id: subscription_plan.stripe_id, :subscription_plan => valid_attributes}
         expect(response).to redirect_to(admin_subscription_plans_path)
       end
     end
@@ -126,7 +118,7 @@ describe Admins::SubscriptionPlansController do
         subscription_plan = SubscriptionPlan.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        put :update, {id: subscription_plan.id, :subscription_plan => {  }}
+        put :update, {id: subscription_plan.stripe_id, :subscription_plan => {  }}
         expect(assigns(:subscription_plan)).to eq(subscription_plan)
       end
 
@@ -134,7 +126,7 @@ describe Admins::SubscriptionPlansController do
         subscription_plan = SubscriptionPlan.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        put :update, {id: subscription_plan.id, :subscription_plan => {  }}
+        put :update, {id: subscription_plan.stripe_id, :subscription_plan => {  }}
         expect(response).to render_template("edit")
       end
     end
@@ -144,13 +136,13 @@ describe Admins::SubscriptionPlansController do
     it "destroys the requested subscription_plan" do
       subscription_plan = SubscriptionPlan.create! valid_attributes
       expect {
-        delete :destroy, {id: subscription_plan.id}
+        delete :destroy, {id: subscription_plan.stripe_id}
       }.to change(SubscriptionPlan, :count).by(-1)
     end
 
     it "redirects to the subscription_plans list" do
       subscription_plan = SubscriptionPlan.create! valid_attributes
-      delete :destroy, {id: subscription_plan.id}
+      delete :destroy, {id: subscription_plan.stripe_id}
       expect(response).to redirect_to(admin_subscription_plans_path)
     end
   end
