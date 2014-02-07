@@ -3,15 +3,11 @@ module Permissions
     def initialize
       allow "devise/passwords", [:new, :create, :edit, :update]
       allow "devise/sessions", [:new, :create, :destroy]
-      allow :comments, [:index, :new, :create]
       allow :content, [:index, :pricing, :privacy, :terms]
-      allow :list_subscribers, [:create, :confirm, :new]
-      allow_param :list_subscriber, [:email, :first_name]
-      allow :posts, [:index, :show]
       allow :subscriptions, [:new, :create, :thankyou]
-      allow_param :subscription, [:amount, :billing_card_token, :next_renewal_at, :renewal_period, :status, :subscription_plan_id]
-      allow_nested_param :subscription, :user_attributes, [:email, :first_name, :last_name, :password, :password_confirmation, :username]
-      allow_nested_param :subscription, :clients_attributes, [:name]
+      # allow_param :subscription, [:amount, :billing_card_token, :next_renewal_at, :renewal_period, :status, :subscription_plan_id]
+      # allow_nested_param :subscription, :user_attributes, [:email, :first_name, :last_name, :password, :password_confirmation, :username]
+      # allow_nested_param :subscription, :clients_attributes, [:name]
     end
   end
 end
