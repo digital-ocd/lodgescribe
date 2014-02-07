@@ -1,0 +1,10 @@
+= form_for @subscription_plan do |f|
+  - if @subscription_plan.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@subscription_plan.errors.count, "error")} prohibited this subscription_plan from being saved:"
+      %ul
+        - @subscription_plan.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

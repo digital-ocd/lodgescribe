@@ -1,0 +1,17 @@
+%h1 Listing subscription_plans
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @subscription_plans.each do |subscription_plan|
+    %tr
+      %td= link_to 'Show', subscription_plan
+      %td= link_to 'Edit', edit_subscription_plan_path(subscription_plan)
+      %td= link_to 'Destroy', subscription_plan, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Subscription plan', new_subscription_plan_path

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   scope 'a', module: 'admins', as: 'admin' do
     get 'dashboard' => 'users#dashboard', as: 'root'
+    resources :subscription_plans
     resources :users
   end
 
