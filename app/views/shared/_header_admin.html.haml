@@ -11,4 +11,7 @@
       %span LodgeScribe
     .nav-no-collapse.header-nav
       %ul.nav.navbar-nav.pull-right
-        = render "shared/admin_links"
+        - if current_admin
+          = render "shared/admin_links"
+        - elsif current_user
+          = render "shared/user_links"

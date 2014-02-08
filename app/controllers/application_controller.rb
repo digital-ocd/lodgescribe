@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  class Unauthorized < StandardError; end
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -11,6 +13,10 @@ class ApplicationController < ActionController::Base
   delegate :allow_param?, to: :current_permission
   helper_method :allow_param?
 
+  def current_lodge
+    @current_lodge ||= set_lodge
+  end
+
   private
 
   def after_sign_in_path_for(resource)
@@ -21,8 +27,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
   def app_user
-    @app_user ||= ( current_admin ) ? current_admin : nil
+    @app_user ||= ( current_user ) ? current_user : ( (current_admin) ? current_admin : nil )
   end
 
   def authorize
@@ -41,6 +51,14 @@ class ApplicationController < ActionController::Base
 
   def current_resource
     nil
+  end
+
+  def set_lodge
+    if params[:sub_domain]
+      Lodge.find_by_sub_domain(params[:sub_domain])
+    else
+      current_user.lodges.first
+    end
   end
 
 end
