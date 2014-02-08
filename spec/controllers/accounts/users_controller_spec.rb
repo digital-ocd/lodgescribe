@@ -44,7 +44,7 @@ describe Accounts::UsersController do
 
   describe "GET new" do
     context "as a Lodge Member" do
-      it "raises a 401 exception", :focus do
+      it "raises a 401 exception" do
         expect {
           get :new, { sub_domain: lodge.sub_domain }
         }.to raise_error ApplicationController::Unauthorized
@@ -53,6 +53,7 @@ describe Accounts::UsersController do
 
     context "as a Lodge Officer" do
       it "assigns a new user as @user" do
+        allow(controller.current_user).to receive(:can_admin?).and_return(true)
         get :new, { sub_domain: lodge.sub_domain }
         expect(assigns(:user)).to be_a_new(User)
       end
@@ -60,45 +61,82 @@ describe Accounts::UsersController do
   end
 
   describe "GET edit" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :edit, {:id => user.to_param}
-      expect(assigns(:user)).to eq(user)
+    context "as a general Lodge Member" do
+      it "raises a 401 exception" do
+        expect {
+          get :edit, { sub_domain: lodge.sub_domain, id: 24 }
+        }.to raise_error ApplicationController::Unauthorized
+      end
+    end
+
+    context "as a Lodge Officer" do
+      it "assigns a new user as @user" do
+        allow(controller.current_user).to receive(:can_admin?).and_return(true)
+        user = lodge.members.create! valid_attributes
+        get :edit, { sub_domain: lodge.sub_domain, id: user.id }
+        expect(assigns(:user)).to eq(user)
+      end
+    end
+
+    context "as the user" do
+      it "assigns a new user as @user" do
+        get :edit, { sub_domain: lodge.sub_domain, id: member.id }
+        expect(assigns(:user)).to eq(member)
+      end
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new User" do
-        expect {
-          post :create, {:user => valid_attributes}
-        }.to change(User, :count).by(1)
+      context "as a general Lodge Member" do
+        it "raises a 401 exception" do
+          expect {
+            get :create, { sub_domain: lodge.sub_domain, user: valid_attributes }
+          }.to raise_error ApplicationController::Unauthorized
+        end
       end
 
-      it "assigns a newly created user as @user" do
-        post :create, {:user => valid_attributes}
-        expect(assigns(:user)).to be_a(User)
-        expect(assigns(:user)).to be_persisted
+      context "as a Lodge Officer" do
+        before(:each) do
+          allow(controller.current_user).to receive(:can_admin?).and_return(true)
+        end
+
+        it "creates a new User" do
+          expect {
+            post :create, { sub_domain: lodge.sub_domain, user: valid_attributes }
+          }.to change(User, :count).by(1)
+        end
+
+        it "assigns a newly created user as @user" do
+          post :create, { sub_domain: lodge.sub_domain, user: valid_attributes }
+          expect(assigns(:user)).to be_a(User)
+          expect(assigns(:user)).to be_persisted
+        end
+
+        it "redirects to the lodge member index" do
+          post :create, { sub_domain: lodge.sub_domain, user: valid_attributes }
+          expect(response).to redirect_to(lodge_users_path(lodge.sub_domain))
+        end
       end
 
-      it "redirects to the created user" do
-        post :create, {:user => valid_attributes}
-        expect(response).to redirect_to(User.last)
-      end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        allow(controller.current_user).to receive(:can_admin?).and_return(true)
+      end
+
       it "assigns a newly created but unsaved user as @user" do
         # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => {  }}
+        allow_any_instance_of(User).to receive(:save).and_return(false)
+        post :create, { sub_domain: lodge.sub_domain, user: {  } }
         expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => {  }}
+        allow_any_instance_of(User).to receive(:save).and_return(false)
+        post :create, { sub_domain: lodge.sub_domain, user: {  } }
         expect(response).to render_template("new")
       end
     end
@@ -106,61 +144,118 @@ describe Accounts::UsersController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested user" do
-        user = User.create! valid_attributes
-        # Assuming there are no other users in the database, this
-        # specifies that the User created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(User).to receive(:update).with({ "these" => "params" })
-        put :update, {:id => user.to_param, :user => { "these" => "params" }}
+      context "as a general Lodge Member" do
+        it "raises a 401 exception" do
+          expect {
+            get :update, { sub_domain: lodge.sub_domain, id: 2, user: { "first_name" => "Hiram" } }
+          }.to raise_error ApplicationController::Unauthorized
+        end
       end
 
-      it "assigns the requested user as @user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}
-        expect(assigns(:user)).to eq(user)
+      context "as a Lodge Officer" do
+        before(:each) do
+          allow(controller.current_user).to receive(:can_admin?).and_return(true)
+        end
+
+        it "updates the requested user" do
+          user = User.create! valid_attributes
+          expect_any_instance_of(User).to receive(:update).with({ "first_name" => "Hiram" })
+          put :update, { sub_domain: lodge.sub_domain, id: user.id, user: { "first_name" => "Hiram" }}
+        end
+
+        it "assigns the requested user as @user" do
+          put :update, { sub_domain: lodge.sub_domain, id: member.id, user: valid_attributes }
+          expect(assigns(:user)).to eq(member)
+        end
+
+        it "redirects to the lodge's member index" do
+          put :update, { sub_domain: lodge.sub_domain, id: member.id, user: valid_attributes }
+          expect(response).to redirect_to(lodge_users_path(lodge.sub_domain))
+        end
       end
 
-      it "redirects to the user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}
-        expect(response).to redirect_to(user)
+      context "as the user" do
+        it "updates the requested user" do
+          expect_any_instance_of(User).to receive(:update).with({ "first_name" => "Hiram" })
+          put :update, { sub_domain: lodge.sub_domain, id: member.id, user: { "first_name" => "Hiram" }}
+        end
       end
+
     end
 
     describe "with invalid params" do
       it "assigns the user as @user" do
-        user = User.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {  }}
-        expect(assigns(:user)).to eq(user)
+        allow_any_instance_of(User).to receive(:save).and_return(false)
+        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  } }
+        expect(assigns(:user)).to eq(member)
       end
 
       it "re-renders the 'edit' template" do
-        user = User.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {  }}
+        allow_any_instance_of(User).to receive(:save).and_return(false)
+        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  } }
         expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested user" do
-      user = User.create! valid_attributes
-      expect {
-        delete :destroy, {:id => user.to_param}
-      }.to change(User, :count).by(-1)
+    context "as a general Lodge Member" do
+      it "raises a 401 exception" do
+        user = lodge.members.create! valid_attributes
+        expect {
+          get :destroy, { sub_domain: lodge.sub_domain, id: user.id }
+        }.to raise_error ApplicationController::Unauthorized
+      end
     end
 
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, {:id => user.to_param}
-      expect(response).to redirect_to(users_url)
+    context "as a Lodge Officer" do
+      before(:each) do
+        allow(controller.current_user).to receive(:can_admin?).and_return(true)
+      end
+
+      context "member with no other affiliations" do
+        it "destroys the requested user" do
+          user              = lodge.members.create! valid_attributes
+          user_count        = User.count
+          membership_count  = Membership.count
+
+          delete :destroy, { sub_domain: lodge.sub_domain, id: user.id}
+          expect(User.count).to eq(user_count - 1)
+          expect(Membership.count).to eq(membership_count - 1)
+        end
+
+        it "redirects to the users list" do
+          user = lodge.members.create! valid_attributes
+          delete :destroy, { sub_domain: lodge.sub_domain, id: user.id}
+          expect(response).to redirect_to(lodge_users_path(lodge.sub_domain))
+        end
+      end
+
+      context "member with other affiliations" do
+        it "destroys the membership affiliation" do
+          lodge_2           = create(:lodge)
+          user              = lodge.members.create! valid_attributes
+          lodge_2.memberships.create({user_id: user.id})
+          user_count        = User.count
+          membership_count  = Membership.count
+
+          delete :destroy, { sub_domain: lodge.sub_domain, id: user.id}
+          expect(User.count).to eq(user_count)
+          expect(Membership.count).to eq(membership_count - 1)
+        end
+      end
+
     end
+
+    context "as the user" do
+      it "redirects to the lodge's member index" do
+        delete :destroy, { sub_domain: lodge.sub_domain, id: member.id}
+        expect(response).to redirect_to(lodge_users_path(lodge.sub_domain))
+      end
+    end
+
   end
 
 end
