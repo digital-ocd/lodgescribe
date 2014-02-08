@@ -12,10 +12,6 @@ Rails.application.routes.draw do
     # resources :users, only: []
   end
 
-  scope ':sub_domain', as: 'lodge' do
-    resources :users, module: 'accounts'
-  end
-
   # resources :lodges, except: [:create, :new] do
   #   resources :users
   # end
@@ -31,6 +27,10 @@ Rails.application.routes.draw do
     get 'dashboard' => 'users#dashboard', as: 'root'
     resources :subscription_plans
     resources :users
+  end
+
+  scope ':sub_domain', as: 'lodge' do
+    resources :users, module: 'accounts'
   end
 
   match '(errors)/:status', to: 'errors#show',
