@@ -14,8 +14,22 @@ class User < ActiveRecord::Base
                           if: "username.present?"
   validates_uniqueness_of :username, if: "username.present?"
 
+  def can_admin?(lodge)
+    m = memberships.find_by_lodge_id(lodge.id)
+    if m
+      m.role == "officer" ? true : false
+    else
+      false
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def saas_admin?
+    false
+  end
+
 
 end

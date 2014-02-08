@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :lodge do
-    name 'Milwaukie Lodge 109'
-    sub_domain '109'
+    sequence(:name) {|n| "Masonic Lodge #{n}" }
+    sequence(:sub_domain) {|n| "lodge-#{n}" }
   end
 end

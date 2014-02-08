@@ -8,6 +8,32 @@ describe User do
   it { should respond_to(:last_name) }
   it { should respond_to(:username) }
 
+  describe "can_admin?" do
+    include_context 'lodge_with_member'
+
+    context "when only a member of the lodge" do
+      it "returns true" do
+        member.memberships.first.update_attribute(:role, "member")
+        expect( member.can_admin?(lodge) ).to be false
+      end
+    end
+
+    context "when an officer of the lodge" do
+      it "returns true" do
+        member.memberships.first.update_attribute(:role, "officer")
+        expect( member.can_admin?(lodge) ).to be true
+      end
+    end
+
+    context "when not a member of the lodge" do
+      it "returns false" do
+        foreign_lodge = create(:lodge)
+      expect( member.can_admin?(foreign_lodge) ).to be false
+      end
+    end
+
+  end
+
   describe "full_name" do
     it "return a concatinated first and last name" do
       u = build_stubbed(:user)

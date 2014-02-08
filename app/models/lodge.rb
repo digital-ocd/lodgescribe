@@ -1,7 +1,7 @@
 class Lodge < ActiveRecord::Base
 
   has_many :memberships, :dependent => :destroy
-  has_many :users, through: :memberships
+  has_many :members, through: :memberships, source: :user
 
   validates_presence_of :name, :sub_domain
   validates_format_of     :sub_domain, with: /\A[\w\-\_\.]+\Z/, if: "sub_domain.present?"
