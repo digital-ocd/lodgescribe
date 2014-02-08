@@ -1,8 +1,7 @@
 require "spec_helper"
 
 describe Permissions::MemberPermission do
-  let(:lodge) { create(:lodge) }
-  let(:member) { lodge.members.create(attributes_for(:user)) }
+  include_context 'lodge_with_member'
 
   subject { Permissions.permission_for(member) }
 
@@ -10,11 +9,11 @@ describe Permissions::MemberPermission do
     should authorize("accounts/users", :dashboard)
     should authorize("accounts/users", :index)
     should authorize("accounts/users", :show)
-    # should authorize("accounts/users", :new)
-    # should authorize("accounts/users", :create)
+    should authorize("accounts/users", :new)
+    should authorize("accounts/users", :create)
     should authorize("accounts/users", :edit)
     should authorize("accounts/users", :update)
-    # should authorize("accounts/users", :destroy)
+    should authorize("accounts/users", :destroy)
   end
 
   it "authorization for sessions" do
