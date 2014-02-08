@@ -1,8 +1,24 @@
 Rails.application.routes.draw do
 
-  namespace :admins do
-    resources :users
+  devise_for :users, :skip => [:registrations, :sessions]
+  as :user do
+    get 'signin' => 'devise/sessions#new', as: :new_user_session
+    post 'signin' => 'devise/sessions#create', as: :user_session
+    delete 'signout' => 'devise/sessions#destroy', as: :destroy_user_session
   end
+
+  scope 'u', module: 'accounts' do
+    get 'dashboard' => 'users#dashboard', as: 'user_root'
+    # resources :users, only: []
+  end
+
+  scope ':sub_domain', as: 'lodge' do
+    resources :users, module: 'accounts'
+  end
+
+  # resources :lodges, except: [:create, :new] do
+  #   resources :users
+  # end
 
   devise_for :admins, :skip => [:registrations, :sessions]
   as :admin do
@@ -16,6 +32,11 @@ Rails.application.routes.draw do
     resources :subscription_plans
     resources :users
   end
+
+  match '(errors)/:status', to: 'errors#show',
+    constraints: { status: /\d{3}/ },
+    defaults: { status: '500' },
+    via: :all
 
   root to: "content#index"
   # The priority is based upon order of creation: first created -> highest priority.

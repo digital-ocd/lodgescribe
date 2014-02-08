@@ -1,0 +1,21 @@
+#w1
+  .container
+    %br/
+    .col-lg-10.col-lg-offset-1.centered
+      %br/
+      %h1
+        %b= "#{status_code}"
+      %h2
+        = Rack::Utils::HTTP_STATUS_CODES[status_code] || "Internal Server Error"
+      %br/
+      %hr/
+      %br/
+      %h4 WE CAN HELP YOU TO FIND YOUR PATH.
+      %br/
+      %p
+        -if current_user
+          %b= link_to "Return to Dashboard", user_root_path
+        - elsif current_admin
+          %b= link_to "Return to Dashboard", admin_root_path
+        - else
+          %b= link_to "Return to LodgeScribe", root_path
