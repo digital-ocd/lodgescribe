@@ -5,6 +5,12 @@ describe Permissions::MemberPermission do
 
   subject { Permissions.permission_for(member) }
 
+  it "authorization for lodges" do
+    should authorize("accounts/lodges", :show)
+    should authorize("accounts/lodges", :edit)
+    should authorize("accounts/lodges", :update)
+  end
+
   it "authorization for users" do
     should authorize("accounts/users", :dashboard)
     should authorize("accounts/users", :index)

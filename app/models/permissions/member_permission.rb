@@ -1,6 +1,8 @@
 module Permissions
   class MemberPermission < BasePermission
     def initialize(user)
+      allow "accounts/lodges", [:edit, :show, :update]
+        allow_param :lodge, [:name, :sub_domain]
       allow "accounts/users", [:create, :dashboard, :destroy, :edit, :index, :new, :show, :update]
         allow_param :user, [:current_password, :email, :first_name, :last_name, :password, :password_confirmation, :username]
       allow "devise/passwords", [:new, :create, :edit, :update]
