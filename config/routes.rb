@@ -33,6 +33,11 @@ Rails.application.routes.draw do
     resources :users, module: 'accounts'
   end
 
+  get ':sub_domain/edit' => 'accounts/lodges#edit', as: :edit_lodge
+  get ':sub_domain' => 'accounts/lodges#show', as: :lodge
+  patch ':sub_domain' => 'accounts/lodges#update'
+  put ':sub_domain' => 'accounts/lodges#update'
+
   match '(errors)/:status', to: 'errors#show',
     constraints: { status: /\d{3}/ },
     defaults: { status: '500' },
