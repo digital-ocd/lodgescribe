@@ -11,6 +11,13 @@ describe SubscriptionPlan do
   it { should respond_to(:stripe_id) }
   it { should respond_to(:trial_period) }
 
+  describe "to_param" do
+    it "defaults to the stripe_id" do
+      plan = build(:subscription_plan)
+      expect(plan.to_param).to eq(plan.stripe_id)
+    end
+  end
+
   describe "Validations" do
     [:name, :renewal_period, :stripe_id, :trial_period].each do |attr|
       it "must have a #{attr}" do

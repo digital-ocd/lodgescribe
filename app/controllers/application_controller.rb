@@ -16,6 +16,12 @@ class ApplicationController < ActionController::Base
   def current_lodge
     @current_lodge ||= set_lodge
   end
+  helper_method :current_lodge
+
+  def current_permission
+    @current_permission ||= Permissions.permission_for(app_user)
+  end
+  helper_method :current_permission
 
   private
 
@@ -39,14 +45,8 @@ class ApplicationController < ActionController::Base
     if current_permission.allow?(params[:controller], params[:action], current_resource)
       current_permission.permit_params! params
     else
-      # FIXME
-      #   - create and redirect to a "Not Authorized" error page
-      redirect_to root_url, alert: "You are not authorized."
+      raise ApplicationController::Unauthorized
     end
-  end
-
-  def current_permission
-    @current_permission ||= Permissions.permission_for(app_user)
   end
 
   def current_resource
