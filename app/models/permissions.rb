@@ -4,6 +4,8 @@ module Permissions
       GuestPermission.new
     elsif user.saas_admin?
       SaasAdminPermission.new(user)
+    elsif user
+      MemberPermission.new(user)
     end
   end
 end

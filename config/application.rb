@@ -39,10 +39,17 @@ module LodgeScribe
     end
 
     config.generators do |g|
-      g.test_framework :rspec, :fixture => true
+      g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
       g.view_specs false
+      g.integration_specs false
+      g.stylesheets = false
+      g.javascripts = false
+      g.helper = false
     end
 
+    config.action_dispatch.rescue_responses["ApplicationController::Unauthorized"] = :unauthorized
+
+    config.exceptions_app = self.routes
   end
 end

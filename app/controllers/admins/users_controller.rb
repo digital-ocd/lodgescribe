@@ -1,5 +1,6 @@
 class Admins::UsersController < AdminsController
   before_action :set_saas_admin, only: [:show, :edit, :update, :destroy]
+
   def dashboard
 
   end
