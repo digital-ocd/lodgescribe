@@ -1,11 +1,8 @@
-# README
+# LodgeScribe
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Ruby version
 
-Things you may want to cover:
-
-* Ruby version
+* Ruby 2.1.0
 
 * System dependencies
 
@@ -19,7 +16,32 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+## Development Instructions
 
+Clone the repository onto your machine.
+
+```
+$ git clone git@github.com:digital-ocd/lodgescribe.git
+```
+
+Configure git-flow for your local LodgeScribe repository.
+
+```
+$ cd lodgescribe
+$ git flow init -d
+```
+
+Copy and configure secrets.yml
+
+Copy and configure the database.yml
+
+```
+$ cp config/database.yml.example config/database.yml
+```
+
+Change the `username` to your local postgres user and then create databases:
+
+```
+$ bundle exec rake db:create:all
+```

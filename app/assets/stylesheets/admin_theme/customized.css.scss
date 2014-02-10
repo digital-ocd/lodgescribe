@@ -1,0 +1,140 @@
+/*
+ *  Template Name : reviewitician
+ *  Author : Jeremy S. Ward
+ *  Author URI : http://digital-ocd.com
+ *  -----------------------------------------------------------
+ *
+ */
+
+.navbar {
+  .navbar-brand {
+    display: inline-block;
+    img {
+      display: inline-block;
+      margin-right: 5px;
+      max-height:100%;
+      height:17px;
+    }
+    span {
+      font-family: 'Lato',sans-serif;
+    }
+  }
+}
+
+.header-nav a.btn.account {
+  margin-right: 0;
+}
+
+.chart_line {
+  padding:20px 20px 0px 30px;
+  position: relative;
+  .rickshaw_legend {
+    display: block;
+    background: none;
+    color: #666;
+    ul {
+      display: block;
+      position: relative;
+      li {
+        clear: none;
+        float: right;
+      }
+    }
+  }
+  .rickshaw_y_axis {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: -10px;
+    width: 40px;
+  }
+}
+
+/* DataTables */
+.dataTables_wrapper {
+  .dataTables_filter {
+    label {
+      input {
+        color: #808080;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+form{
+  legend {
+    small {
+      color:#999;
+      font-size: 60%;
+    }
+  }
+  input[type="radio"], input[type="checkbox"] {
+    margin-top: 0px;
+    width: 35px
+  }
+}
+
+.icon-danger {
+  color: #FF5454;
+}
+
+.icon-success {
+  color: #78CD51;
+}
+
+.dl-horizontal {
+  dt {
+    width:100px;
+  }
+  dd {
+    margin-left: 120px;
+  }
+}
+
+.modal-danger {
+  .modal-header {
+    background-color: #da4f49;
+    background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+    background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    background-color: #da4f49;
+    background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+    background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    border-color: #bd362f #bd362f #802420;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    -webkit-background-clip: padding-box; /* fix WebKit background bleed on border-radius */
+        -webkit-border-radius-top-left: 6px; /* pre-Safari 5, delete unused */
+       -webkit-border-radius-top-right: 6px;
+    -webkit-border-radius-bottom-right: 0px;
+     -webkit-border-radius-bottom-left: 0px;
+                    -moz-border-radius: 6px 6px 0px 0px;
+                         border-radius: 6px 6px 0px 0px;
+    color: #ffffff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    h3 {
+      color: #ffffff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    }
+  }
+  .modal-body {
+    .alert-error {
+      text-align: center;
+    }
+    .danger {
+      color:#B94A48;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+%header.navbar
+  .container
+    %button.navbar-toggle{"data-target" => ".sidebar-nav.nav-collapse", "data-toggle" => "collapse", type: "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %a#main-menu-toggle.hidden-xs.open
+      %i.icon-reorder
+    = link_to root_path, class: "navbar-brand", title: "LodgeScribe" do
+      = image_tag "logo_v1.png", alt: "logo", class: "img-responsive"
+      %span LodgeScribe
+    .nav-no-collapse.header-nav
+      %ul.nav.navbar-nav.pull-right
+        - if current_admin
+          = render "shared/admin_links"
+        - elsif current_user
+          = render "shared/user_links"

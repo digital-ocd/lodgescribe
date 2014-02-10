@@ -1,0 +1,15 @@
+!!!
+%html{lang: "en", xmlns: "http://www.w3.org/1999/xhtml", "xmlns:fb" => "https://www.facebook.com/2008/fbml", "xmlns:og" => "http://ogp.me/ns#"}
+  %head
+    = render "shared/layout_meta"
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true, type: "text/javascript"
+    = yield(:head)
+    %link{href: "http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic", rel: "stylesheet", type: "text/css"}/
+    %link{href: "http://fonts.googleapis.com/css?family=Raleway:400,300,700", rel: "stylesheet", type: "text/css"}/
+  %body
+    = render "shared/header"
+
+    = yield
+
+    = render "shared/footer"

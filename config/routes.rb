@@ -1,4 +1,49 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :skip => [:registrations, :sessions]
+  as :user do
+    get 'signin' => 'devise/sessions#new', as: :new_user_session
+    post 'signin' => 'devise/sessions#create', as: :user_session
+    delete 'signout' => 'devise/sessions#destroy', as: :destroy_user_session
+  end
+
+  scope 'u', module: 'accounts' do
+    get 'dashboard' => 'users#dashboard', as: 'user_root'
+    # resources :users, only: []
+  end
+
+  # resources :lodges, except: [:create, :new] do
+  #   resources :users
+  # end
+
+  devise_for :admins, :skip => [:registrations, :sessions]
+  as :admin do
+    get 'admins/signin' => 'devise/sessions#new', as: :new_admin_session
+    post 'admins/signin' => 'devise/sessions#create', as: :admin_session
+    delete 'admins/signout' => 'devise/sessions#destroy', as: :destroy_admin_session
+  end
+
+  scope 'a', module: 'admins', as: 'admin' do
+    get 'dashboard' => 'users#dashboard', as: 'root'
+    resources :subscription_plans
+    resources :users
+  end
+
+  scope ':sub_domain', as: 'lodge' do
+    resources :users, module: 'accounts'
+  end
+
+  get ':sub_domain/edit' => 'accounts/lodges#edit', as: :edit_lodge
+  get ':sub_domain' => 'accounts/lodges#show', as: :lodge
+  patch ':sub_domain' => 'accounts/lodges#update'
+  put ':sub_domain' => 'accounts/lodges#update'
+
+  match '(errors)/:status', to: 'errors#show',
+    constraints: { status: /\d{3}/ },
+    defaults: { status: '500' },
+    via: :all
+
+  root to: "content#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

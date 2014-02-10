@@ -1,0 +1,16 @@
+- content_for :title,  'Edit SaaS Admin'
+
+.row
+  .col-lg-12
+    .box
+      .box-header
+        %h2
+          %i.icon-edit
+          SaaS Admin Details
+      .box-content
+        = simple_form_for [:admin, @saas_admin], :url => admin_user_path, :html => { :class => '', role: 'form' } do |f|
+          %fieldset.col-sm-12
+            = render :partial => 'form', :locals => {:f => f, :saas_admin => @saas_admin}
+            %hr.divider
+            .form-actions
+              = f.submit "Save Changes", class: "btn btn-primary"
