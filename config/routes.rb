@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   scope 'u', module: 'accounts' do
     get 'dashboard' => 'users#dashboard', as: 'user_root'
     # resources :users, only: []
+    get 'profile/edit' => 'users#edit', as: :edit_user
+    get 'profile' => 'users#show', as: :user
+    patch 'profile' => 'users#update'
+    put 'profile' => 'users#update'
   end
-
-  # resources :lodges, except: [:create, :new] do
-  #   resources :users
-  # end
 
   devise_for :admins, :skip => [:registrations, :sessions]
   as :admin do
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   scope ':sub_domain', as: 'lodge' do
-    resources :users, module: 'accounts'
+    resources :members, module: 'accounts'
   end
 
   get ':sub_domain/edit' => 'accounts/lodges#edit', as: :edit_lodge
