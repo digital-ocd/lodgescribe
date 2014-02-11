@@ -3,6 +3,11 @@ class Accounts::UsersController < AccountsController
 
   respond_to :html, :json
 
+  # GET /u/dashboard/1
+  # GET /u/dashboard/1.json
+  def dashboard
+  end
+
   # GET /u/profile/1
   # GET /u/profile/1.json
   def show

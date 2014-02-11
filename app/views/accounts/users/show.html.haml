@@ -1,6 +1,190 @@
-%p#notice= notice
+- content_for :title,  'Profile'
 
-
-= link_to 'Edit', edit_accounts_user_path(@accounts_user)
-\|
-= link_to 'Back', accounts_users_path
+.row
+  .col-lg-12
+    .box
+      .box-header
+        %h2
+          %i.icon-user
+          = current_user.full_name
+        .box-icon
+          = link_to raw("<i class='icon-pencil'></i>"), edit_user_path, rel: 'tooltip', title: "Edit Profile"
+.row.profile
+  .col-sm-3
+    .row
+      .col-xs-7.col-sm-12
+        = image_tag gravatar_url(current_user, 600), class: "profile-image"
+      .col-xs-5.col-sm-12
+        %h3 General Information
+        %ul.profile-details
+          %li
+            %div
+              %i.icon-briefcase
+              position
+            CEO
+          %li
+            %div
+              %i.icon-building
+              company
+            creativeLabs
+        %h3 Contact Information
+        %ul.profile-details
+          %li
+            %div
+              %i.icon-phone
+              phone
+            +48 123 456 789
+          %li
+            %div
+              %i.icon-tablet
+              mobile phone
+            +48 123 456 789
+          %li
+            %div
+              %i.icon-envelope
+              e-mail
+            lukasz@bootstrapmaster.com
+          %li
+            %div
+              %i.icon-map-marker
+              address
+            Konopnickiej 42
+            %br/
+            43-190 Mikolow
+            %br/
+            Slask, Poland
+  .col-sm-9
+    %ul#myTab.nav.nav-tabs
+      %li.active
+        %a{href: "page-profile.html#skills"} Skills
+      %li
+        %a{href: "page-profile.html#friends"} Friends
+    .tab-content
+      #skills.tab-pane.active
+        .row
+          .col-sm-5
+            %h2 About Me
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            %h2 Bio
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            %h2 Job
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            %h2 Languages
+            .row
+              .col-xs-4
+                .language-skill1{"data-percent" => "90", style: "width:100%!important"}
+                  %span> 90
+                  \%
+                %div{style: "text-align:center"} English
+              / /col
+              .col-xs-4
+                .language-skill2{"data-percent" => "43", style: "width:100%!important"}
+                  %span> 43
+                  \%
+                %div{style: "text-align:center"} Spanish
+              / /col
+              .col-xs-4
+                .language-skill3{"data-percent" => "17", style: "width:100%!important"}
+                  %span> 17
+                  \%
+                %div{style: "text-align:center"} German
+              / /col
+            / /row
+          / /col
+          .col-sm-7
+            %h2 My Skills
+            %ul.skill-bar
+              %li
+                %h5 Web Design
+                .meter
+                  %span.lightBlue 40%
+              %li
+                %h5 Wordpress
+                .meter
+                  %span.green 80%
+              %li
+                %h5 Branding
+                .meter
+                  %span.red 100%
+              %li
+                %h5 SEO Optmization
+                .meter
+                  %span.lightOrange 60%
+            %h2 Other Skills
+            %canvas#canvas.chartjs{height: "450", width: "450"}
+          / /col
+        / /row
+      #friends.tab-pane
+        %ul.friends-list.clearfix
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar.jpg"}/
+            %div Lukasz Holeczek
+            %span.label.label-success active
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar2.jpg"}/
+            %div Ann Polansky
+            %span.label.label-warning busy
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar3.jpg"}/
+            %div May Lin
+            %span.label.label-important blocked
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar4.jpg"}/
+            %div Kate Norman
+            %span.label.label-default offline
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar5.jpg"}/
+            %div Mia Lopez
+            %span.label.label-important blocked
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar6.jpg"}/
+            %div Katia Svoboda
+            %span.label.label-success active
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar7.jpg"}/
+            %div Blanka Rosicky
+            %span.label.label-warning busy
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar8.jpg"}/
+            %div Garry Old
+            %span.label.label-success active
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
+          %li
+            %a.avatar{href: "page-profile.html#"}
+              %img{src: "assets/img/avatar9.jpg"}/
+            %div Nick White
+            %span.label.label-success active
+            %a.icon-facebook-sign{href: "page-profile.html#"}
+            %a.icon-twitter-sign{href: "page-profile.html#"}
+            %a.icon-linkedin-sign{href: "page-profile.html#"}
