@@ -3,5 +3,7 @@
     %ul.nav.main-menu
       - if current_admin
         = render 'shared/nav_left_admins'
+      - elsif current_user
+        = render 'shared/nav_left_users'
 
   = link_to raw("<i class='icon-double-angle-left'></i>"), "#", id: "main-menu-min", class: "full visible-md visible-lg"

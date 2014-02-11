@@ -1,10 +1,18 @@
-= form_for @accounts_user do |f|
-  - if @accounts_user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@accounts_user.errors.count, "error")} prohibited this accounts_user from being saved:"
-      %ul
-        - @accounts_user.errors.full_messages.each do |msg|
-          %li= msg
-
-  .actions
-    = f.submit 'Save'
+- if @user.errors.any?
+  .alert.alert-block.alert-danger
+    %a.close{"data-dismiss" => "alert"} ×
+    %h4.alert-heading Oh Snap!
+    We found #{pluralize(@user.errors.count, "problem")} with the form:
+= f.input :first_name
+= f.input :last_name
+= f.input :email, required: true
+= f.input :username
+.legend-cont
+  %legend
+    Change Password
+    %small Leave blank to keep your current password
+= f.input :password, input_html: { autocomplete: 'off' }
+= f.input :password_confirmation, :label =>"Confirm Password"
+.alert.alert-warning
+  Enter your current password to confirm changes
+= f.input :current_password, required: true, hint: "We need your current password to confirm your changes", input_html: { autocomplete: 'off' }

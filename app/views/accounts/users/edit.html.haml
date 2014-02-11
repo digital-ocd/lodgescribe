@@ -1,7 +1,16 @@
-%h1 Editing accounts_user
+- content_for :title,  'Account Settings'
 
-= render 'form'
-
-= link_to 'Show', @accounts_user
-\|
-= link_to 'Back', accounts_users_path
+.row
+  .col-lg-12
+    .box
+      .box-header
+        %h2
+          %i.icon-edit
+          Account Details
+      .box-content
+        = simple_form_for [:user, @user], :url => profile_path, :html => { :class => '', role: 'form' } do |f|
+          %fieldset.col-sm-12
+            = render :partial => 'form', :locals => {:f => f, :user => @user}
+            %hr.divider
+            .form-actions
+              = f.submit "Save Changes", class: "btn btn-primary"
