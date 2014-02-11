@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
 
   scope ':sub_domain', as: 'lodge' do
-    resources :users, module: 'accounts'
+    resources :members, module: 'accounts'
   end
 
   get ':sub_domain/edit' => 'accounts/lodges#edit', as: :edit_lodge

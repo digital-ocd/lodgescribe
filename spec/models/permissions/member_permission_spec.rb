@@ -11,6 +11,16 @@ describe Permissions::MemberPermission do
     should authorize("accounts/lodges", :update)
   end
 
+  it "authorization for Lodge members" do
+    should authorize("accounts/members", :index)
+    should authorize("accounts/members", :show)
+    should authorize("accounts/members", :new)
+    should authorize("accounts/members", :create)
+    should authorize("accounts/members", :edit)
+    should authorize("accounts/members", :update)
+    should authorize("accounts/members", :destroy)
+  end
+
   it "authorization for users" do
     should authorize("accounts/users", :dashboard)
     should authorize("accounts/users", :index)
