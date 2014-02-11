@@ -4,6 +4,8 @@ class Accounts::UsersController < AccountsController
   before_action :verify_lodge_ability, only: [:create, :new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  respond_to :html, :json
+
   # GET /u/dashboard
   def dashboard
 
@@ -33,30 +35,15 @@ class Accounts::UsersController < AccountsController
   # POST /:sub_domain/users.json
   def create
     @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to lodge_users_path(current_lodge.sub_domain), notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "User was created successfully." if @user.save
+    respond_with @user, location: lodge_users_path(current_lodge.sub_domain)
   end
 
   # PATCH/PUT /:sub_domain/users/1
   # PATCH/PUT /:sub_domain/users/1.json
   def update
-    respond_to do |format|
-      if @user.update(params[:user])
-        format.html { redirect_to lodge_users_path(current_lodge.sub_domain), notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "User was successfully updated." if @user.update(params[:user])
+    respond_with @user, location: lodge_users_path(current_lodge.sub_domain)
   end
 
   # DELETE /:sub_domain/users/1
@@ -69,10 +56,7 @@ class Accounts::UsersController < AccountsController
     else
       @user.destroy
     end
-    respond_to do |format|
-      format.html { redirect_to lodge_users_path(current_lodge.sub_domain), notice: 'User was successfully removed.' }
-      format.json { head :no_content }
-    end
+    respond_with @user, location: lodge_users_path(current_lodge.sub_domain), notice: 'User was successfully removed.'
   end
 
   private
@@ -98,7 +82,7 @@ class Accounts::UsersController < AccountsController
   def set_user
     # FIXME
     #   - might want to scope this down to the current_lodge
-    #   - if so, be sure to rescure from potental ActiveRecord::RecordNotFound
+    #   - if so, be sure to rescue from potental ActiveRecord::RecordNotFound
     # @user = current_lodge.members.find(params[:id])
     @user = User.find(params[:id])
   end

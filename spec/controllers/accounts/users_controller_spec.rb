@@ -127,16 +127,12 @@ describe Accounts::UsersController do
       end
 
       it "assigns a newly created but unsaved user as @user" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(User).to receive(:save).and_return(false)
-        post :create, { sub_domain: lodge.sub_domain, user: {  } }
+        post :create, { sub_domain: lodge.sub_domain, user: { email: '' } }
         expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(User).to receive(:save).and_return(false)
-        post :create, { sub_domain: lodge.sub_domain, user: {  } }
+        post :create, { sub_domain: lodge.sub_domain, user: { email: '' } }
         expect(response).to render_template("new")
       end
     end
@@ -185,16 +181,12 @@ describe Accounts::UsersController do
 
     describe "with invalid params" do
       it "assigns the user as @user" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(User).to receive(:save).and_return(false)
-        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  } }
+        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  email: '' } }
         expect(assigns(:user)).to eq(member)
       end
 
       it "re-renders the 'edit' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(User).to receive(:save).and_return(false)
-        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  } }
+        put :update, { sub_domain: lodge.sub_domain, id: member.id, user: {  email: '' } }
         expect(response).to render_template("edit")
       end
     end
