@@ -20,20 +20,14 @@ class Admins::SubscriptionPlansController < AdminsController
   # POST /a/subscription_plans
   def create
     @subscription_plan = SubscriptionPlan.new(params[:subscription_plan])
-    if @subscription_plan.save
-      redirect_to admin_subscription_plans_path, notice: 'Subscription plan was successfully created.'
-    else
-      render action: 'new'
-    end
+    flash[:notice] = "User was successfully updated." if @subscription_plan.save
+    respond_with @subscription_plan, location: admin_subscription_plans_path
   end
 
   # PATCH/PUT /a/subscription_plans/1
   def update
-    if @subscription_plan.update(params[:subscription_plan])
-      redirect_to admin_subscription_plans_path, notice: 'Subscription plan was successfully updated.'
-    else
-      render action: 'edit'
-    end
+    flash[:notice] = 'Subscription plan was successfully updated.' if @subscription_plan.update(params[:subscription_plan])
+    respond_with @subscription_plan, location: admin_subscription_plans_path
   end
 
   # DELETE /a/subscription_plans/1

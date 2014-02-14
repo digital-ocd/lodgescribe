@@ -55,78 +55,62 @@ describe Admins::SubscriptionPlansController do
     describe "with valid params" do
       it "creates a new SubscriptionPlan" do
         expect {
-          post :create, {:subscription_plan => valid_attributes}
+          post :create, {subscription_plan: valid_attributes}
         }.to change(SubscriptionPlan, :count).by(1)
       end
 
       it "assigns a newly created subscription_plan as @subscription_plan" do
-        post :create, {:subscription_plan => valid_attributes}
+        post :create, {subscription_plan: valid_attributes}
         expect(assigns(:subscription_plan)).to be_a(SubscriptionPlan)
         expect(assigns(:subscription_plan)).to be_persisted
       end
 
       it "redirects to the created subscription_plan" do
-        post :create, {:subscription_plan => valid_attributes}
+        post :create, {subscription_plan: valid_attributes}
         expect(response).to redirect_to(admin_subscription_plans_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved subscription_plan as @subscription_plan" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        post :create, {:subscription_plan => {  }}
+        post :create, {subscription_plan: { stripe_id: '' }}
         expect(assigns(:subscription_plan)).to be_a_new(SubscriptionPlan)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        post :create, {:subscription_plan => {  }}
+        post :create, {subscription_plan: { stripe_id: '' }}
         expect(response).to render_template("new")
       end
     end
   end
 
   describe "PUT update" do
+    let(:subscription_plan) { create(:subscription_plan) }
     describe "with valid params" do
       it "updates the requested subscription_plan" do
-        subscription_plan = SubscriptionPlan.create! valid_attributes
-        # Assuming there are no other subscription_plans in the database, this
-        # specifies that the SubscriptionPlan created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         expect_any_instance_of(SubscriptionPlan).to receive(:update).with({ "these" => "params" })
-        put :update, {id: subscription_plan.stripe_id, :subscription_plan => { "these" => "params" }}
+        put :update, {id: subscription_plan.stripe_id, subscription_plan: { "these" => "params" }}
       end
 
       it "assigns the requested subscription_plan as @subscription_plan" do
-        subscription_plan = SubscriptionPlan.create! valid_attributes
-        put :update, {id: subscription_plan.stripe_id, :subscription_plan => valid_attributes}
+        put :update, {id: subscription_plan.stripe_id, subscription_plan: valid_attributes}
         expect(assigns(:subscription_plan)).to eq(subscription_plan)
       end
 
       it "redirects to the subscription_plan" do
-        subscription_plan = SubscriptionPlan.create! valid_attributes
-        put :update, {id: subscription_plan.stripe_id, :subscription_plan => valid_attributes}
+        put :update, {id: subscription_plan.stripe_id, subscription_plan: valid_attributes}
         expect(response).to redirect_to(admin_subscription_plans_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns the subscription_plan as @subscription_plan" do
-        subscription_plan = SubscriptionPlan.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        put :update, {id: subscription_plan.stripe_id, :subscription_plan => {  }}
+        put :update, {id: subscription_plan.stripe_id, subscription_plan: { stripe_id: '' }}
         expect(assigns(:subscription_plan)).to eq(subscription_plan)
       end
 
       it "re-renders the 'edit' template" do
-        subscription_plan = SubscriptionPlan.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(SubscriptionPlan).to receive(:save).and_return(false)
-        put :update, {id: subscription_plan.stripe_id, :subscription_plan => {  }}
+        put :update, {id: subscription_plan.stripe_id, subscription_plan: { stripe_id: '' }}
         expect(response).to render_template("edit")
       end
     end
