@@ -50,7 +50,7 @@ describe Admins::UsersController do
 
   describe "GET edit" do
     it "assigns the requested admins_user as @saas_admin" do
-      get :edit, {id: admin.to_param}
+      get :edit, {id: admin.id}
       expect(assigns(:saas_admin)).to eq(admin)
     end
   end
@@ -77,60 +77,44 @@ describe Admins::UsersController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved admins_user as @saas_admin" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Admin).to receive(:save).and_return(false)
-        post :create, {admin: { "email" => "invalid value" }}
+        post :create, { admin: { email: "" } }
         expect(assigns(:saas_admin)).to be_a_new(Admin)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Admin).to receive(:save).and_return(false)
-        post :create, {admin: { "email" => "invalid value" }}
+        post :create, { admin: { email: "" } }
         expect(response).to render_template("new")
       end
     end
   end
 
   describe "PUT update" do
+    let(:user) { create(:admin) }
     describe "with valid params" do
       it "updates the requested admins_user" do
-        user = Admin.create! valid_attributes
-        # Assuming there are no other admins_users in the database, this
-        # specifies that the Admin created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         expect_any_instance_of(Admin).to receive(:update).with({ "email" => "spider-man@avengers.com" })
-        put :update, {id: user.to_param, admin: { "email" => "spider-man@avengers.com" }}
+        put :update, {id: user.id, admin: { "email" => "spider-man@avengers.com" }}
       end
 
       it "assigns the requested admins_user as @saas_admin" do
-        user = Admin.create! valid_attributes
-        put :update, {id: user.to_param, admin: valid_attributes}
+        put :update, {id: user.id, admin: valid_attributes}
         expect(assigns(:saas_admin)).to eq(user)
       end
 
       it "redirects to the admins_user" do
-        user = Admin.create! valid_attributes
-        put :update, {id: user.to_param, admin: valid_attributes}
+        put :update, {id: user.id, admin: valid_attributes}
         expect(response).to redirect_to(admin_users_path)
       end
     end
 
     describe "with invalid params" do
       it "assigns the admins_user as @saas_admin" do
-        user = Admin.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Admin).to receive(:save).and_return(false)
-        put :update, {id: user.to_param, admin: { "email" => "invalid value" }}
+        put :update, {id: user.id,  admin: { email: "" } }
         expect(assigns(:saas_admin)).to eq(user)
       end
 
       it "re-renders the 'edit' template" do
-        user = Admin.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Admin).to receive(:save).and_return(false)
-        put :update, {id: user.to_param, admin: { "email" => "invalid value" }}
+        put :update, {id: user.id,  admin: { email: "" } }
         expect(response).to render_template("edit")
       end
     end
@@ -140,13 +124,13 @@ describe Admins::UsersController do
     it "destroys the requested admins_user" do
       new_admin = Admin.create! valid_attributes
       expect {
-        delete :destroy, {id: new_admin.to_param}
+        delete :destroy, {id: new_admin.id}
       }.to change(Admin, :count).by(-1)
     end
 
     it "redirects to the admins_users list" do
       new_admin = Admin.create! valid_attributes
-      delete :destroy, {id: new_admin.to_param}
+      delete :destroy, {id: new_admin.id}
       expect(response).to redirect_to(admin_users_path)
     end
   end

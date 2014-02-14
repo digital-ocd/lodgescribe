@@ -30,20 +30,14 @@ class Admins::UsersController < AdminsController
   # POST /a/users
   def create
     @saas_admin = Admin.new(params[:admin])
-    if @saas_admin.save
-      redirect_to admin_users_path, notice: 'SaaS Admin was successfully created.'
-    else
-      render action: 'new'
-    end
+    flash[:notice] = 'SaaS Admin was successfully created.' if @saas_admin.save
+    respond_with @saas_admin, location: admin_users_path
   end
 
   # PATCH/PUT /a/users/1
   def update
-    if @saas_admin.update(params[:admin])
-      redirect_to admin_users_path, notice: 'SaaS Admin was successfully updated.'
-    else
-      render action: 'edit'
-    end
+    flash[:notice] = 'SaaS Admin was successfully updated.' if @saas_admin.update(params[:admin])
+    respond_with @saas_admin, location: admin_users_path
   end
 
   # DELETE /a/users/1
