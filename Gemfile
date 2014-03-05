@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0.beta1'
+gem 'rails', '4.1.0.rc1'
 
 # assets
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
