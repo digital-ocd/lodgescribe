@@ -93,7 +93,7 @@ group :test, :development do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler', require: false
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'spork-rails'
 end
