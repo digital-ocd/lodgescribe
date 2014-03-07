@@ -8,7 +8,7 @@
           %i.icon-edit
           Account Details
       .box-content
-        = simple_form_for [:user, @user], :url => profile_path, :html => { :class => '', role: 'form' } do |f|
+        = simple_form_for [:user, @user], :url => user_account_path, :html => { :class => '', role: 'form' } do |f|
           %fieldset.col-sm-12
             = render :partial => 'form', :locals => {:f => f, :user => @user}
             %hr.divider

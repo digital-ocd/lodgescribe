@@ -3,9 +3,6 @@
     %a.close{"data-dismiss" => "alert"} ×
     %h4.alert-heading Oh Snap!
     We found #{pluralize(@user.errors.count, "problem")} with the form:
-= f.input :first_name
-= f.input :last_name
-= f.input :email, required: true
 = f.input :username
 .legend-cont
   %legend
