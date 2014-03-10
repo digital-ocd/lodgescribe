@@ -16,7 +16,7 @@ class Accounts::ProfilesController < AccountsController
   # PATCH/PUT /u/profile.json
   def update
     flash[:notice] = "Profile was successfully updated." if @profile.update(params[:profile])
-    respond_with @profile, location: user_profile_path
+    respond_with @profile, location: edit_user_profile_path
   end
 
   private

@@ -37,7 +37,7 @@ describe Accounts::ProfilesController do
 
       it "redirects to the profile" do
         put :update, { profile: valid_attributes }
-        expect(response).to redirect_to(user_profile_path)
+        expect(response).to redirect_to(edit_user_profile_path)
       end
     end
 
