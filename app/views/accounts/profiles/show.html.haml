@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @profile.user
+%p
+  %b Initiated at:
+  = @profile.initiated_at
+%p
+  %b Passed at:
+  = @profile.passed_at
+%p
+  %b Raised at:
+  = @profile.raised_at
+%p
+  %b Birth date:
+  = @profile.birth_date
+%p
+  %b Birth city:
+  = @profile.birth_city
+%p
+  %b Birth state:
+  = @profile.birth_state
+%p
+  %b Birth country:
+  = @profile.birth_country
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

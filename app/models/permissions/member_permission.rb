@@ -8,7 +8,7 @@ module Permissions
       allow "accounts/users", [:create, :dashboard, :destroy, :edit, :index, :new, :show, :update]
         allow_param :user, [:current_password, :password, :password_confirmation, :username]
       allow "accounts/profiles", [:edit, :show, :update]
-        allow_param :user, [:birth_city, :birth_date, :birth_state, :birth_country, :email, :first_name, :last_name, ]
+        allow_param :profile, [:birth_city, :birth_date, :birth_state, :birth_country, :email, :first_name, :last_name, ]
       allow "devise/passwords", [:new, :create, :edit, :update]
       allow "devise/sessions", [:new, :create, :destroy]
       allow :content, [:index, :pricing, :privacy, :terms]
