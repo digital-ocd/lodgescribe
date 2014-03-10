@@ -32,6 +32,12 @@ describe Permissions::MemberPermission do
     should authorize("accounts/users", :destroy)
   end
 
+  it "authorization for user profile" do
+    should authorize("accounts/profiles", :show)
+    should authorize("accounts/profiles", :edit)
+    should authorize("accounts/profiles", :update)
+  end
+
   it "authorization for sessions" do
     should authorize("devise/sessions", :new)
     should authorize("devise/sessions", :create)
