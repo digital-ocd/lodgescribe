@@ -8,9 +8,9 @@
           %i.icon-edit
           My Profile
       .box-content
-        = simple_form_for [:profile, @profile], :url => user_profile_path, :html => { :class => '', role: 'form' } do |f|
+        = simple_form_for [:user, @user], url: user_profile_path, html: { class: '', role: 'form', method: :patch } do |f|
           %fieldset.col-sm-12
-            = render :partial => 'form', :locals => {:f => f, :profile => @profile}
+            = render :partial => 'form', :locals => {:f => f, :user => @user}
             %hr.divider
             .form-actions
               = f.submit "Save Changes", class: "btn btn-primary"

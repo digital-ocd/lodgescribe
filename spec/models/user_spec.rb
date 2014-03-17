@@ -41,31 +41,6 @@ describe User do
 
   end
 
-  describe "#full_name" do
-    it "return a concatinated first and last name" do
-      u = build_stubbed(:user)
-      expect(u.full_name).to eq("#{u.first_name} #{u.last_name}")
-    end
-  end
-
-  describe "Creation" do
-    context "With profile data" do
-      it "Creates an associated profile" do
-        expect {
-          create(:user, profile_attributes: attributes_for(:profile) )
-        }.to change(Profile, :count).by(1)
-      end
-    end
-
-    context "Without profile data" do
-      it "Only creates a user" do
-        expect {
-          create(:user)
-        }.to change(Profile, :count).by(0)
-      end
-    end
-  end
-
   describe "Validations" do
 
     [:first_name, :last_name, :username, :email].each do |attr|

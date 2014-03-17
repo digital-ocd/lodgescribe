@@ -1,11 +1,12 @@
 class Accounts::ProfilesController < AccountsController
-  before_action :set_profile, only: [:show, :edit, :update]
+  before_action :set_form, only: [:edit, :update]
 
   respond_to :html, :json
 
   # GET /u/profile
   # GET /u/profile.json
   def show
+    @user = current_user
   end
 
   # GET /u/profile/edit
@@ -15,13 +16,13 @@ class Accounts::ProfilesController < AccountsController
   # PATCH/PUT /u/profile
   # PATCH/PUT /u/profile.json
   def update
-    flash[:notice] = "Profile was successfully updated." if @profile.update(params[:profile])
-    respond_with @profile, location: edit_user_profile_path
+    flash[:notice] = "Profile was successfully updated." if @user.submit(params[:user])
+    respond_with @user, location: edit_user_profile_path
   end
 
   private
 
-    def set_profile
-      @profile = current_user.profile
-    end
+  def set_form
+    @user = UpdateUserProfileForm.new(current_user)
+  end
 end
