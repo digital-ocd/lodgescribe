@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207192348) do
+ActiveRecord::Schema.define(version: 20140305235445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,24 @@ ActiveRecord::Schema.define(version: 20140207192348) do
   add_index "memberships", ["lodge_id", "user_id"], name: "index_memberships_on_lodge_id_and_user_id", unique: true, using: :btree
   add_index "memberships", ["lodge_id"], name: "index_memberships_on_lodge_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
+  create_table "profiles", force: true do |t|
+    t.integer  "user_id"
+    t.date     "initiated_at"
+    t.date     "passed_at"
+    t.date     "raised_at"
+    t.date     "birth_date"
+    t.string   "birth_city"
+    t.string   "birth_state"
+    t.string   "birth_country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "profiles", ["birth_date"], name: "index_profiles_on_birth_date", using: :btree
+  add_index "profiles", ["initiated_at"], name: "index_profiles_on_initiated_at", using: :btree
+  add_index "profiles", ["passed_at"], name: "index_profiles_on_passed_at", using: :btree
+  add_index "profiles", ["raised_at"], name: "index_profiles_on_raised_at", using: :btree
 
   create_table "subscription_plans", force: true do |t|
     t.string   "name"

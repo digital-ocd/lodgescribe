@@ -9,11 +9,8 @@ Rails.application.routes.draw do
 
   scope 'u', module: 'accounts' do
     get 'dashboard' => 'users#dashboard', as: 'user_root'
-    # resources :users, only: []
-    get 'profile/edit' => 'users#edit', as: :edit_user
-    get 'profile' => 'users#show', as: :user
-    patch 'profile' => 'users#update'
-    put 'profile' => 'users#update'
+    resource :account, only: [:edit, :show, :update], controller: 'users', as: :user_account
+    resource :profile, only: [:edit, :show, :update], controller: 'profiles', as: :user_profile
   end
 
   devise_for :admins, :skip => [:registrations, :sessions]

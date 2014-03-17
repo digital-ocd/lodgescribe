@@ -40,7 +40,7 @@ describe Accounts::UsersController do
 
       it "redirects to the lodge's member index" do
         put :update, { user: valid_attributes }
-        expect(response).to redirect_to(user_path)
+        expect(response).to redirect_to(user_account_path)
       end
 
     end

@@ -11,6 +11,7 @@ Spork.prefork do
       add_group 'Controllers', 'app/controllers'
       add_group 'Models', 'app/models'
       add_group 'Helpers', 'app/helpers'
+      add_group 'Forms', 'app/forms'
       add_group 'Libraries', 'lib'
       # add_group "Long files" do |src_file|
       #   src_file.lines.count > 100
@@ -107,6 +108,7 @@ Spork.each_run do
       add_group 'Controllers', 'app/controllers'
       add_group 'Models', 'app/models'
       add_group 'Helpers', 'app/helpers'
+      add_group 'Forms', 'app/forms'
       add_group 'Libraries', 'lib'
       add_group "Long files" do |src_file|
         src_file.lines.count > 100

@@ -4,6 +4,7 @@
     - current_user.lodges.order("name asc").each do |lodge|
       = admin_link_to(lodge.name.titleize, lodge_path(lodge.sub_domain), "icon-legal")
 %li
-  = admin_link_to_dropdown("My Profile", "icon-user")
+  = admin_link_to_dropdown("Settings", "icon-cogs")
   %ul
-    = admin_link_to("Edit Profile", edit_user_path, "icon-user")
+    = admin_link_to("Account", edit_user_account_path, "icon-lock")
+    = admin_link_to("Profile", edit_user_profile_path, "icon-user")

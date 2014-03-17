@@ -2,13 +2,20 @@ require 'spec_helper'
 
 describe User do
 
+  it { should respond_to(:birth_city) }
+  it { should respond_to(:birth_country) }
+  it { should respond_to(:birth_date) }
+  it { should respond_to(:birth_state) }
   it { should respond_to(:email) }
   it { should respond_to(:first_name) }
   it { should respond_to(:full_name) }
   it { should respond_to(:last_name) }
+  it { should respond_to(:initiated_at) }
+  it { should respond_to(:passed_at) }
+  it { should respond_to(:raised_at) }
   it { should respond_to(:username) }
 
-  describe "can_admin?" do
+  describe "#can_admin?" do
     include_context 'lodge_with_member'
 
     context "when only a member of the lodge" do
@@ -32,13 +39,6 @@ describe User do
       end
     end
 
-  end
-
-  describe "full_name" do
-    it "return a concatinated first and last name" do
-      u = build_stubbed(:user)
-      expect(u.full_name).to eq("#{u.first_name} #{u.last_name}")
-    end
   end
 
   describe "Validations" do

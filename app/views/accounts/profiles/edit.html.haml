@@ -1,4 +1,4 @@
-- content_for :title,  'Account Settings'
+- content_for :title,  'My Profile'
 
 .row
   .col-lg-12
@@ -6,9 +6,9 @@
       .box-header
         %h2
           %i.icon-edit
-          Account Details
+          My Profile
       .box-content
-        = simple_form_for [:user, @user], :url => user_account_path, :html => { :class => '', role: 'form' } do |f|
+        = simple_form_for [:user, @user], url: user_profile_path, html: { class: '', role: 'form', method: :patch } do |f|
           %fieldset.col-sm-12
             = render :partial => 'form', :locals => {:f => f, :user => @user}
             %hr.divider

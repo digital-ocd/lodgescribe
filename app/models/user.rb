@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :lodges, through: :memberships
 
-  validates_presence_of :first_name, :last_name, :username
+  has_one :profile
+  delegate :birth_city, :birth_country, :birth_date, :birth_state, :initiated_at, :passed_at, :raised_at, to: :profile, allow_nil: true
+
+  validates_presence_of :email, :first_name, :last_name, :username
   validates_format_of     :username, with: /\A[\w\-\_\.]+\Z/, if: "username.present?"
   validates_exclusion_of  :username, in: %w(support blog www billing help api m mobile biz),
                           message: "The username <strong>{{value}}</strong> is not available.",

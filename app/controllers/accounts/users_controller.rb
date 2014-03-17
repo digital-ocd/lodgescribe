@@ -8,24 +8,24 @@ class Accounts::UsersController < AccountsController
   def dashboard
   end
 
-  # GET /u/profile/1
-  # GET /u/profile/1.json
+  # GET /u/account/1
+  # GET /u/account/1.json
   def show
   end
 
-  # GET /u/profile/edit
+  # GET /u/account/edit
   def edit
   end
 
-  # PATCH/PUT /u/profile/1
-  # PATCH/PUT /u/profile/1.json
+  # PATCH/PUT /u/account/1
+  # PATCH/PUT /u/account/1.json
   def update
     if @user.update_with_password(params[:user])
       # Sign in the user by passing validation in case his password changed
       sign_in @user, :bypass => true if @user.id == current_user.id
       flash[:notice] = "User was successfully updated."
     end
-    respond_with @user, location: user_path
+    respond_with @user, location: user_account_path
   end
 
   private
