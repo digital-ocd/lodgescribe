@@ -1,5 +1,6 @@
 class UpdateUserProfileForm
   include ActiveModel::Model
+  include ActiveModel::Validations::Callbacks
 
   def persisted?
     false
@@ -20,8 +21,8 @@ class UpdateUserProfileForm
   end
 
   def submit(params)
-    user.attributes    = params.slice(:email, :first_name, :last_name)
-    profile.attributes = params.slice(:birth_city, :birth_date, :birth_state, :birth_country)
+    _set_params(params)
+
     if valid?
       user.save!
       profile.save!
@@ -32,6 +33,15 @@ class UpdateUserProfileForm
   end
 
   private
+
+  def _set_params(params)
+    user.attributes    = params.slice(:email, :first_name, :last_name)
+    profile.attributes = params.slice(:birth_city, :birth_state, :birth_country).merge({ birth_date: _set_date(params[:birth_date]) })
+  end
+
+  def _set_date(date)
+    Date.strptime(date, '%m/%d/%Y') if date.present?
+  end
 
   attr_accessor :profile, :user
 
