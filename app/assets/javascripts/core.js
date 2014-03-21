@@ -437,49 +437,49 @@ jQuery(document).ready(function($){
 
 });
 
-jQuery(document).on("page:change", function($) {
-
-  /* ---------- Activity Feed ---------- */
-  if($("#feed").length) {
-
-    $('#filter > li > a').click(function(e){
-
-      var selected = $(this).attr('data-option-value');
-
-      $(this).parent().parent().find('a').each(function(){
-
-        $(this).removeClass('active');
-
-      });
-
-      $(this).addClass('active');
-
-
-      $('#timeline > li').each(function(){
-
-        if($(this).hasClass(selected)) {
-
-          $(this).show();
-
-        } else if (selected == 'all') {
-
-          $(this).show();
-
-        } else {
-
-          $(this).hide();
-
-        }
-
-      });
-
-      e.preventDefault();
-
-    });
-
-  }
-
-});
+// jQuery(document).on("page:change", function($) {
+//
+//   /* ---------- Activity Feed ---------- */
+//   if($("#feed").length) {
+//
+//     $('#filter > li > a').click(function(e){
+//
+//       var selected = $(this).attr('data-option-value');
+//
+//       $(this).parent().parent().find('a').each(function(){
+//
+//         $(this).removeClass('active');
+//
+//       });
+//
+//       $(this).addClass('active');
+//
+//
+//       $('#timeline > li').each(function(){
+//
+//         if($(this).hasClass(selected)) {
+//
+//           $(this).show();
+//
+//         } else if (selected == 'all') {
+//
+//           $(this).show();
+//
+//         } else {
+//
+//           $(this).hide();
+//
+//         }
+//
+//       });
+//
+//       e.preventDefault();
+//
+//     });
+//
+//   }
+//
+// });
 
 jQuery(document).ready(function(){
   /* ---------- Skill Bars ---------- */

@@ -25,6 +25,10 @@ module ApplicationHelper
     link_to raw("<i class=\"icon-trash\"></i>"), path, class: "btn btn-danger", method: :delete, data: { confirm: msg}
   end
 
+  def format_date_select(date)
+    date = date.present? ? date.strftime('%m/%d/%Y') : ''
+  end
+
   def gravatar_url(user, size = 26)
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "https://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=mm"
