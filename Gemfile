@@ -77,9 +77,6 @@ end
 gem 'pry'
 gem 'pry-debugger'
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/jonleighton/spring
-gem 'spring',        group: :development
-
 group :development do
   gem 'bullet'
   # gem 'capistrano', '~> 3.1.0'
@@ -87,6 +84,7 @@ group :development do
   # gem 'capistrano-bundler', '~> 1.1', require: false
   # gem 'capistrano-rbenv', '~> 2.0', require: false
   gem 'guard-rspec', require: false
+  gem 'spring'
 end
 
 group :test, :development do
