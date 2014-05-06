@@ -23,6 +23,13 @@ GIT
       ruby-progressbar (~> 1.3)
 
 GIT
+  remote: git@github.com:oc-digital/ocd_theme_admin_genius.git
+  revision: 944d27f21a62507ee7773b75c0feace728c5f894
+  specs:
+    ocd_theme_admin_genius (1.0.0)
+      rails (~> 4.1.0)
+
+GIT
   remote: https://github.com/jrmyward/rickshaw-rails.git
   revision: cb6cef321eef2003352f21624acb49dff0833635
   branch: master
@@ -344,6 +351,7 @@ DEPENDENCIES
   launchy
   less-rails
   minitest
+  ocd_theme_admin_genius!
   pg
   poltergeist
   pry

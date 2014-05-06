@@ -11,11 +11,11 @@
  *= require_self
  *= require theme/bootstrap
  *= require font-awesome
- *= require admin_theme/import_css/jquery-ui-1.10.3.custom.min
- *= require_directory ./admin_theme/import_css
- *= require admin_theme/style
- *= require admin_theme/morris
+ *= require ocd_theme_admin_genius/import_css/jquery-ui-1.10.3.custom.min
+ *= require ocd_theme_admin_genius/import_css
+ *= require ocd_theme_admin_genius/style
+ *= require ocd_theme_admin_genius/morris
  *= require rickshaw
- *= require admin_theme/retina.min
- *= require admin_theme/customized
+ *= require ocd_theme_admin_genius/retina.min
+ *= require admin_customized
  */

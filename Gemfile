@@ -61,6 +61,9 @@ gem 'jbuilder', '~> 1.2'
 # sitemap
 # gem 'sitemap_generator'
 
+# themes
+gem 'ocd_theme_admin_genius', git: 'git@github.com:oc-digital/ocd_theme_admin_genius.git'
+
 # views
 gem 'browser', :git => 'git://github.com/fnando/browser'
 gem "font-awesome-rails", '~> 3.2.1.3'
